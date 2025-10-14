@@ -13,9 +13,10 @@ namespace RolePlayHelper.API.Controllers
     {
         private readonly UserService _userService;
         private readonly AuthService _authService;
-        public UserController(UserService userService)
+        public UserController(UserService userService, AuthService authService)
         {
             _userService = userService;
+            _authService = authService;
         }
         [HttpPost("register")]
         public ActionResult Register([FromBody] UserRegisterFormDto form)
@@ -25,7 +26,7 @@ namespace RolePlayHelper.API.Controllers
                 return BadRequest();
             }
             _userService.CreateUser(form.ToUser());
-            return Created("User created");
+            return Created();
         }
 
         [HttpPost("login")]
@@ -42,7 +43,7 @@ namespace RolePlayHelper.API.Controllers
 
             string token = _authService.GenerateToken(user);
 
-            return Ok("User logged in");
+            return Ok();
         }
 
     }
