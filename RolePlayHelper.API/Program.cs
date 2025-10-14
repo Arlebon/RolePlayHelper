@@ -7,6 +7,9 @@ using RolePlayHelper.BLL.Services;
 using RolePlayHelper.DAL.Repositories;
 using System.Text;
 
+using Microsoft.EntityFrameworkCore;
+using RolePlayHelper.DAL.Database;
+
 namespace RolePlayHelper.API
 {
     public class Program
@@ -87,6 +90,8 @@ namespace RolePlayHelper.API
             });
 
 
+
+            builder.Services.AddDbContext<RolePlayHelperContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             var app = builder.Build();
 

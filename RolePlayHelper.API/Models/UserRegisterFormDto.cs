@@ -1,4 +1,4 @@
-﻿using RolePlayHelper.DL.Enum;
+﻿using RolePlayHelper.DL.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace RolePlayHelper.API.Models
