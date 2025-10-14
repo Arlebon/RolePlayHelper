@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RolePlayHelper.DL.Enum
 {
-    internal class Role
+    public class Role
     {
     }
 }
