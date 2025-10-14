@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using RolePlayHelper.DAL.Database;
+
 namespace RolePlayHelper.API
 {
     public class Program
@@ -13,6 +16,8 @@ namespace RolePlayHelper.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<RolePlayHelperContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             var app = builder.Build();
 
