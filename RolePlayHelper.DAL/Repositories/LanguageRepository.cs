@@ -9,5 +9,10 @@ namespace RolePlayHelper.DAL.Repositories
         public LanguageRepository(RolePlayHelperContext context) : base(context)
         {
         }
+
+        public Language? GetByName(string name)
+        {
+            return _set.FirstOrDefault(l => l.Name == name);
+        }
     }
 }

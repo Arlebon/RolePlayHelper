@@ -9,5 +9,10 @@ namespace RolePlayHelper.DAL.Repositories
         public RaceTraitRepository(RolePlayHelperContext context) : base(context)
         {
         }
+
+        public RaceTrait? GetByName(string name)
+        {
+            return _set.FirstOrDefault(t => t.Name == name);
+        }
     }
 }

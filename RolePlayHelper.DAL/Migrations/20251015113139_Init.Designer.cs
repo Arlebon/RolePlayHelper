@@ -12,8 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    [Migration("20251015105323_modified_joined_tables")]
-    partial class modified_joined_tables
+    [Migration("20251015113139_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

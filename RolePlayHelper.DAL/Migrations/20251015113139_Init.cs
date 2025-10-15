@@ -5,7 +5,7 @@
 namespace RolePlayHelper.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -103,7 +103,7 @@ namespace RolePlayHelper.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RaceLanguages",
+                name: "Race_Languages",
                 columns: table => new
                 {
                     LanguagesId = table.Column<int>(type: "int", nullable: false),
@@ -111,15 +111,15 @@ namespace RolePlayHelper.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RaceLanguages", x => new { x.LanguagesId, x.RacesId });
+                    table.PrimaryKey("PK_Race_Languages", x => new { x.LanguagesId, x.RacesId });
                     table.ForeignKey(
-                        name: "FK_RaceLanguages_Language_LanguagesId",
+                        name: "FK_Race_Languages_Language_LanguagesId",
                         column: x => x.LanguagesId,
                         principalTable: "Language",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RaceLanguages_Race_RacesId",
+                        name: "FK_Race_Languages_Race_RacesId",
                         column: x => x.RacesId,
                         principalTable: "Race",
                         principalColumn: "Id",
@@ -127,7 +127,7 @@ namespace RolePlayHelper.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RaceTraits",
+                name: "Race_Traits",
                 columns: table => new
                 {
                     RacesId = table.Column<int>(type: "int", nullable: false),
@@ -135,15 +135,15 @@ namespace RolePlayHelper.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RaceTraits", x => new { x.RacesId, x.TraitsId });
+                    table.PrimaryKey("PK_Race_Traits", x => new { x.RacesId, x.TraitsId });
                     table.ForeignKey(
-                        name: "FK_RaceTraits_RaceTrait_TraitsId",
+                        name: "FK_Race_Traits_RaceTrait_TraitsId",
                         column: x => x.TraitsId,
                         principalTable: "RaceTrait",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RaceTraits_Race_RacesId",
+                        name: "FK_Race_Traits_Race_RacesId",
                         column: x => x.RacesId,
                         principalTable: "Race",
                         principalColumn: "Id",
@@ -169,20 +169,20 @@ namespace RolePlayHelper.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RaceLanguages_RacesId",
-                table: "RaceLanguages",
+                name: "IX_Race_Languages_RacesId",
+                table: "Race_Languages",
                 column: "RacesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Race_Traits_TraitsId",
+                table: "Race_Traits",
+                column: "TraitsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RaceTrait_Name",
                 table: "RaceTrait",
                 column: "Name",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RaceTraits_TraitsId",
-                table: "RaceTraits",
-                column: "TraitsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User__Email",
@@ -201,10 +201,10 @@ namespace RolePlayHelper.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RaceLanguages");
+                name: "Race_Languages");
 
             migrationBuilder.DropTable(
-                name: "RaceTraits");
+                name: "Race_Traits");
 
             migrationBuilder.DropTable(
                 name: "User_");
