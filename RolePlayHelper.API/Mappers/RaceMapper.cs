@@ -27,7 +27,7 @@ namespace RolePlayHelper.API.Mappers
 
 
                 // Pour chaque entré dans Traits je crée une nouvelle entité RaceTrait.
-                Traits = form.Traits.Select(t => t.ToRaceTrait()).ToList(),
+                Traits = form.Traits.Select(t => t.ToRaceTrait()).ToList()
             };
         }
     }
