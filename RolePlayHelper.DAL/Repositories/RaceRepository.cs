@@ -1,5 +1,6 @@
 ﻿using EntityToolBox;
 using Microsoft.EntityFrameworkCore;
+using RolePlayHelper.DAL.Database;
 using RolePlayHelper.DL.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RolePlayHelper.DAL.Repositories
 {
-    internal class RaceRepository : BaseRepository<Race>
+    public class RaceRepository : BaseRepository<Race>
     {
         public RaceRepository(RolePlayHelperContext context) : base(context)
         {
