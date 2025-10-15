@@ -39,11 +39,11 @@ namespace RolePlayHelper.DAL.Database.Configs
 
             builder.HasMany(r => r.Languages)
                 .WithMany(l => l.Races)
-                .UsingEntity(j => j.ToTable("RaceLanguages")); //==> Permet de modifier le nom de la table intermédiaire
+                .UsingEntity(j => j.ToTable("Race_Languages")); //==> Permet de modifier le nom de la table intermédiaire
 
             builder.HasMany(r => r.Traits)
                 .WithMany(t => t.Races)
-                .UsingEntity(j => j.ToTable("RaceTraits")); 
+                .UsingEntity(j => j.ToTable("Race_Traits")); 
             
         }
     }

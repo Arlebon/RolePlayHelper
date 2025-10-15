@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RolePlayHelper.DAL.Database;
 
@@ -11,9 +12,11 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    partial class RolePlayHelperContextModelSnapshot : ModelSnapshot
+    [Migration("20251015103323_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.HasIndex("RacesId");
 
-                    b.ToTable("Race_Languages", (string)null);
+                    b.ToTable("RaceLanguages", (string)null);
                 });
 
             modelBuilder.Entity("RaceRaceTrait", b =>
@@ -49,7 +52,7 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.HasIndex("TraitsId");
 
-                    b.ToTable("Race_Traits", (string)null);
+                    b.ToTable("RaceTraits", (string)null);
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Language", b =>

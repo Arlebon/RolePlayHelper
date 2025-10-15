@@ -12,8 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    [Migration("20251015082005_Init")]
-    partial class Init
+    [Migration("20251015105323_modified_joined_tables")]
+    partial class modified_joined_tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,57 @@ namespace RolePlayHelper.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("LanguageRace", b =>
+                {
+                    b.Property<int>("LanguagesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RacesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LanguagesId", "RacesId");
+
+                    b.HasIndex("RacesId");
+
+                    b.ToTable("Race_Languages", (string)null);
+                });
+
+            modelBuilder.Entity("RaceRaceTrait", b =>
+                {
+                    b.Property<int>("RacesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TraitsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RacesId", "TraitsId");
+
+                    b.HasIndex("TraitsId");
+
+                    b.ToTable("Race_Traits", (string)null);
+                });
+
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Language", (string)null);
+                });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Race", b =>
                 {
@@ -58,6 +109,31 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Race", (string)null);
+                });
+
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.RaceTrait", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("RaceTrait", (string)null);
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.StatModifier", b =>
@@ -153,6 +229,36 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("User_", (string)null);
+                });
+
+            modelBuilder.Entity("LanguageRace", b =>
+                {
+                    b.HasOne("RolePlayHelper.DL.Entities.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RolePlayHelper.DL.Entities.Race", null)
+                        .WithMany()
+                        .HasForeignKey("RacesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RaceRaceTrait", b =>
+                {
+                    b.HasOne("RolePlayHelper.DL.Entities.Race", null)
+                        .WithMany()
+                        .HasForeignKey("RacesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RolePlayHelper.DL.Entities.RaceTrait", null)
+                        .WithMany()
+                        .HasForeignKey("TraitsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Race", b =>

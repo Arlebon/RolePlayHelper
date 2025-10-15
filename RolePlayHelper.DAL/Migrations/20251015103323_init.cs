@@ -5,11 +5,38 @@
 namespace RolePlayHelper.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Language",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Language", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RaceTrait",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RaceTrait", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "StatModifier",
                 columns: table => new
@@ -75,6 +102,60 @@ namespace RolePlayHelper.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RaceLanguages",
+                columns: table => new
+                {
+                    LanguagesId = table.Column<int>(type: "int", nullable: false),
+                    RacesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RaceLanguages", x => new { x.LanguagesId, x.RacesId });
+                    table.ForeignKey(
+                        name: "FK_RaceLanguages_Language_LanguagesId",
+                        column: x => x.LanguagesId,
+                        principalTable: "Language",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RaceLanguages_Race_RacesId",
+                        column: x => x.RacesId,
+                        principalTable: "Race",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RaceTraits",
+                columns: table => new
+                {
+                    RacesId = table.Column<int>(type: "int", nullable: false),
+                    TraitsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RaceTraits", x => new { x.RacesId, x.TraitsId });
+                    table.ForeignKey(
+                        name: "FK_RaceTraits_RaceTrait_TraitsId",
+                        column: x => x.TraitsId,
+                        principalTable: "RaceTrait",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RaceTraits_Race_RacesId",
+                        column: x => x.RacesId,
+                        principalTable: "Race",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Language_Name",
+                table: "Language",
+                column: "Name",
+                unique: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_Race_Name",
                 table: "Race",
@@ -86,6 +167,22 @@ namespace RolePlayHelper.DAL.Migrations
                 table: "Race",
                 column: "StatModifierId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RaceLanguages_RacesId",
+                table: "RaceLanguages",
+                column: "RacesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RaceTrait_Name",
+                table: "RaceTrait",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RaceTraits_TraitsId",
+                table: "RaceTraits",
+                column: "TraitsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User__Email",
@@ -104,10 +201,22 @@ namespace RolePlayHelper.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Race");
+                name: "RaceLanguages");
+
+            migrationBuilder.DropTable(
+                name: "RaceTraits");
 
             migrationBuilder.DropTable(
                 name: "User_");
+
+            migrationBuilder.DropTable(
+                name: "Language");
+
+            migrationBuilder.DropTable(
+                name: "RaceTrait");
+
+            migrationBuilder.DropTable(
+                name: "Race");
 
             migrationBuilder.DropTable(
                 name: "StatModifier");

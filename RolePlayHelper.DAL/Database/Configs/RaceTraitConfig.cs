@@ -8,7 +8,7 @@ namespace RolePlayHelper.DAL.Database.Configs
     {
         public void Configure(EntityTypeBuilder<RaceTrait> builder)
         {
-            builder.ToTable("Language");
+            builder.ToTable("RaceTrait");
 
             builder.HasKey(r => r.Id);
             builder.Property(r => r.Id).ValueGeneratedOnAdd();
