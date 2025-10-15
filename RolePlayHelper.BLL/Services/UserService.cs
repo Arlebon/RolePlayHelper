@@ -13,7 +13,7 @@ namespace RolePlayHelper.BLL.Services
 
         public void CreateUser(User newUser )
         {
-            if (_userRepository.ExistByUsername(newUser.Username) || _userRepository.ExistByEmail(newUser.Email)) 
+            if (_userRepository.ExistByUsername(newUser.UserName) || _userRepository.ExistByEmail(newUser.Email)) 
             {
                 throw new Exception("User with this username or email already exists");
             }

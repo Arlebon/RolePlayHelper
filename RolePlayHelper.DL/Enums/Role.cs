@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RolePlayHelper.DL.Enum
+namespace RolePlayHelper.DL.Enums
 {
-    public class Role
+    public enum Role
     {
+        Admin,
+        User,
     }
 }

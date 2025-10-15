@@ -4,6 +4,7 @@ using RolePlayHelper.BLL.Services;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.DL.Entities;
 using RolePlayHelper.API.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RolePlayHelper.API.Controllers
 {
@@ -18,6 +19,8 @@ namespace RolePlayHelper.API.Controllers
             _userService = userService;
             _authService = authService;
         }
+
+        [Authorize]
         [HttpPost("register")]
         public ActionResult Register([FromBody] UserRegisterFormDto form)
         {
@@ -43,7 +46,7 @@ namespace RolePlayHelper.API.Controllers
 
             string token = _authService.GenerateToken(user);
 
-            return Ok();
+            return Ok(new {token});
         }
 
     }

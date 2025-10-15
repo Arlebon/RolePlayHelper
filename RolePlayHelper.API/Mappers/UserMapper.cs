@@ -11,7 +11,7 @@ namespace RolePlayHelper.API.Mappers
             {
                 Email = user.Email,
                 Password = user.Password,
-                Username = user.Username,
+                UserName = user.Username,
             };
         }
     }
