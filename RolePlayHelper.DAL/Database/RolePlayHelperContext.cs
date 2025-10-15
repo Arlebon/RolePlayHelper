@@ -17,6 +17,8 @@ namespace RolePlayHelper.DAL.Database
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<StatModifier> StatModifiers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RolePlayHelperContext).Assembly);

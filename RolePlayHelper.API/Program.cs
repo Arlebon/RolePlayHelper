@@ -58,11 +58,14 @@ namespace RolePlayHelper.API
 
             #region Repositories
             builder.Services.AddScoped<UserRepository>();
+            builder.Services.AddScoped<StatModifierRepository>();
+            builder.Services.AddScoped<RaceRepository>();
             #endregion
 
             #region Services
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<AuthService>();
+            builder.Services.AddScoped<RaceService>();
             #endregion
 
 
