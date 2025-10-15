@@ -60,12 +60,17 @@ namespace RolePlayHelper.API
             builder.Services.AddScoped<UserRepository>();
             builder.Services.AddScoped<StatModifierRepository>();
             builder.Services.AddScoped<RaceRepository>();
+            builder.Services.AddScoped<RaceTraitRepository>();
+            builder.Services.AddScoped<LanguageRepository>();
+            
             #endregion
 
             #region Services
             builder.Services.AddScoped<UserService>();
             builder.Services.AddScoped<AuthService>();
             builder.Services.AddScoped<RaceService>();
+            builder.Services.AddScoped<RaceTraitService>();
+            builder.Services.AddScoped<LanguageService>();
             #endregion
 
 

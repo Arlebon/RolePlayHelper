@@ -36,6 +36,14 @@ namespace RolePlayHelper.DAL.Database.Configs
             builder.HasOne(r => r.StatModifier)
                 .WithOne(sm => sm.Race)
                 .HasForeignKey<Race>(r => r.StatModifierId);
+
+            builder.HasMany(r => r.Languages)
+                .WithMany(l => l.Races)
+                .UsingEntity(j => j.ToTable("RaceLanguages")); //==> Permet de modifier le nom de la table intermédiaire
+
+            builder.HasMany(r => r.Traits)
+                .WithMany(t => t.Races)
+                .UsingEntity(j => j.ToTable("RaceTraits")); 
             
         }
     }

@@ -8,12 +8,10 @@ namespace RolePlayHelper.DL.Entities
         public string Name { get; set; } = null!;
 
         public string Description { get; set; } = null!;
-        //public int RaceTraitId { get; set; }
-        //public List<RaceTrait> Traits { get; set; } = [];
 
-
-        //public int LanguageId { get; set; }
-        //public IEnumerable<Language> Languages { get; set; } = [];
+      
+        public List<RaceTrait> Traits { get; set; } = new();
+        public List<Language> Languages { get; set; } = new();
 
 
         public int StatModifierId { get; set; }

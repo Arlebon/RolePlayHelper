@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RolePlayHelper.DL.Entities
 {
-    internal class RaceTrait
+    public class RaceTrait
     {
         public int Id { get; set; }
 
@@ -14,12 +14,7 @@ namespace RolePlayHelper.DL.Entities
 
         public string Description { get; set; } = null!;
 
-
-        public int StatModifierId { get; set; }
-        public List<StatModifier> StatModifiers { get; set; } = [];
-
-
-
+        public List<Race> Races { get; set; } = new();
 
     }
 }
