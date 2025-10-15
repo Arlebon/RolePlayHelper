@@ -12,13 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-<<<<<<<< HEAD:RolePlayHelper.DAL/Migrations/20251015095428_Init.Designer.cs
-    [Migration("20251015095428_Init")]
-    partial class Init
-========
-    [Migration("20251015103323_init")]
-    partial class init
->>>>>>>> Race-Raph:RolePlayHelper.DAL/Migrations/20251015103323_init.Designer.cs
+    [Migration("20251015105323_modified_joined_tables")]
+    partial class modified_joined_tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +37,7 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.HasIndex("RacesId");
 
-                    b.ToTable("RaceLanguages", (string)null);
+                    b.ToTable("Race_Languages", (string)null);
                 });
 
             modelBuilder.Entity("RaceRaceTrait", b =>
@@ -57,7 +52,7 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.HasIndex("TraitsId");
 
-                    b.ToTable("RaceTraits", (string)null);
+                    b.ToTable("Race_Traits", (string)null);
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Language", b =>
