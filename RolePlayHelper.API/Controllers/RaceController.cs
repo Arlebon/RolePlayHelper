@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
-using RolePlayHelper.API.Models;
+using RolePlayHelper.API.Models.Race;
 using RolePlayHelper.BLL.Services;
 using RolePlayHelper.DL.Entities;
 

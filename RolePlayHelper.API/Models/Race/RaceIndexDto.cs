@@ -1,4 +1,4 @@
-﻿namespace RolePlayHelper.API.Models
+﻿namespace RolePlayHelper.API.Models.Race
 {
     public class RaceIndexDto
     {

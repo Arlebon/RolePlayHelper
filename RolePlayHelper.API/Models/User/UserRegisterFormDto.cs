@@ -1,7 +1,7 @@
 ﻿using RolePlayHelper.DL.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace RolePlayHelper.API.Models
+namespace RolePlayHelper.API.Models.User
 {
     public class UserRegisterFormDto
     {

@@ -1,4 +1,4 @@
-﻿using RolePlayHelper.API.Models;
+﻿using RolePlayHelper.API.Models.Race;
 using RolePlayHelper.DL.Entities;
 
 namespace RolePlayHelper.API.Mappers
