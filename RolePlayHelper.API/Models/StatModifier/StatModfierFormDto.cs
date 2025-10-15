@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RolePlayHelper.DL.Entities
+﻿namespace RolePlayHelper.API.Models.StatModifier
 {
-    public class StatModifier
+    public class StatModfierFormDto
     {
-        public int Id { get; set; }
-
         public int? STR { get; set; }
 
         public int? DEX { get; set; }
@@ -35,7 +27,5 @@ namespace RolePlayHelper.DL.Entities
         public int? SpellAttack { get; set; }
 
         public int? SpellSave { get; set; }
-
-        public Race? Race { get; set; }
     }
 }

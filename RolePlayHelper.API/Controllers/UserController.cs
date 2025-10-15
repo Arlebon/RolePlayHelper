@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RolePlayHelper.API.Models;
-using RolePlayHelper.BLL.Services; 
+using RolePlayHelper.BLL.Services;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.DL.Entities;
 using RolePlayHelper.API.Services;
 using Microsoft.AspNetCore.Authorization;
+using RolePlayHelper.API.Models.User;
 
 namespace RolePlayHelper.API.Controllers
 {

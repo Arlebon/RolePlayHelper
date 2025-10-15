@@ -1,4 +1,5 @@
-﻿using RolePlayHelper.API.Models;
+﻿using RolePlayHelper.API.Models.Race;
+using RolePlayHelper.API.Models.StatModifier;
 using RolePlayHelper.DL.Entities;
 
 namespace RolePlayHelper.API.Mappers
@@ -19,6 +20,7 @@ namespace RolePlayHelper.API.Mappers
             {
                 Name = form.Name,
                 Description = form.Description,
+                StatModifier = form.StatModifier.ToStatModifier()
             };
         }
     }
