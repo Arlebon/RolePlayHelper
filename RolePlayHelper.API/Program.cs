@@ -9,6 +9,7 @@ using System.Text;
 
 using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
+using RolePlayHelper.API.Middlewares;
 
 namespace RolePlayHelper.API
 {
@@ -106,6 +107,8 @@ namespace RolePlayHelper.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();
