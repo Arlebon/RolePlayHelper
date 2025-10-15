@@ -14,7 +14,7 @@ namespace RolePlayHelper.DAL.Database
         {
 
         }
-
+        public DbSet<Character> Characters{ get; set; }
         public DbSet<User> Users { get; set; }
 
         public DbSet<Race> Races { get; set; }

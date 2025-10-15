@@ -16,5 +16,7 @@ namespace RolePlayHelper.DL.Entities
 
         public int StatModifierId { get; set; }
         public StatModifier StatModifier { get; set; } = null!;
+
+        public List<Character> Characters { get; set; } = new();
     }
 }

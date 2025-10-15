@@ -52,6 +52,73 @@ namespace RolePlayHelper.DAL.Migrations
                     b.ToTable("Race_Traits", (string)null);
                 });
 
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArmorClass")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CHA")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CON")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DEX")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HitModifier")
+                        .HasColumnType("int");
+
+                    b.Property<int>("INT")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Initiative")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MVT")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxHP")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("STR")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpellAttack")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpellSave")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WIS")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Character");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("Character", (string)null);
+                });
+
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Language", b =>
                 {
                     b.Property<int>("Id")
@@ -258,6 +325,17 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
+                {
+                    b.HasOne("RolePlayHelper.DL.Entities.Race", "Race")
+                        .WithMany("Characters")
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Race");
+                });
+
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Race", b =>
                 {
                     b.HasOne("RolePlayHelper.DL.Entities.StatModifier", "StatModifier")
@@ -267,6 +345,11 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("StatModifier");
+                });
+
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Race", b =>
+                {
+                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.StatModifier", b =>

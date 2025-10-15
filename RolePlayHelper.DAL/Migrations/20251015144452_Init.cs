@@ -103,6 +103,40 @@ namespace RolePlayHelper.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Character",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    STR = table.Column<int>(type: "int", nullable: false),
+                    DEX = table.Column<int>(type: "int", nullable: false),
+                    CHA = table.Column<int>(type: "int", nullable: false),
+                    INT = table.Column<int>(type: "int", nullable: false),
+                    CON = table.Column<int>(type: "int", nullable: false),
+                    WIS = table.Column<int>(type: "int", nullable: false),
+                    MVT = table.Column<int>(type: "int", nullable: false),
+                    MaxHP = table.Column<int>(type: "int", nullable: false),
+                    ArmorClass = table.Column<int>(type: "int", nullable: false),
+                    HitModifier = table.Column<int>(type: "int", nullable: false),
+                    Initiative = table.Column<int>(type: "int", nullable: false),
+                    SpellAttack = table.Column<int>(type: "int", nullable: false),
+                    SpellSave = table.Column<int>(type: "int", nullable: false),
+                    RaceId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Character", x => x.Id)
+                        .Annotation("SqlServer:Clustered", true);
+                    table.ForeignKey(
+                        name: "FK_Character_Race_RaceId",
+                        column: x => x.RaceId,
+                        principalTable: "Race",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Race_Languages",
                 columns: table => new
                 {
@@ -149,6 +183,17 @@ namespace RolePlayHelper.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Character_Name",
+                table: "Character",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Character_RaceId",
+                table: "Character",
+                column: "RaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Language_Name",
@@ -200,6 +245,9 @@ namespace RolePlayHelper.DAL.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Character");
+
             migrationBuilder.DropTable(
                 name: "Race_Languages");
 
