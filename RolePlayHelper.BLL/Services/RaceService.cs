@@ -1,4 +1,5 @@
 ﻿
+using RolePlayHelper.BLL.Exceptions.Race;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 
@@ -18,7 +19,11 @@ namespace RolePlayHelper.BLL.Services
         }
 
         public void Add(Race race) 
-        { 
+        {
+            if(_raceRepository.ExistByName(race.Name))
+            {
+                throw new RaceAlreadyExistsException($"Race with name {race.Name} already exists");
+            }
             _raceRepository.Add(race);
         }
     }

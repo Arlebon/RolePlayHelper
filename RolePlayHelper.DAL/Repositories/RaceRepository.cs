@@ -15,5 +15,10 @@ namespace RolePlayHelper.DAL.Repositories
         public RaceRepository(RolePlayHelperContext context) : base(context)
         {
         }
+
+        public bool ExistByName(string name)
+        {
+            return _set.Any(r => r.Name == name);
+        }
     }
 }
