@@ -14,7 +14,12 @@ namespace RolePlayHelper.DL.Entities
 
         public string Description { get; set; } = null!;
 
-        public Dictionary<int StatModifyer, int Value> StatModifiers { get; set; }
+
+        public int StatModifierId { get; set; }
+        public List<StatModifier> StatModifiers { get; set; } = [];
+
+
+
 
     }
 }
