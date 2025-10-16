@@ -1,4 +1,5 @@
 ﻿using RolePlayHelper.BLL.Exceptions.Character;
+using RolePlayHelper.BLL.Tools;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 using System;
@@ -12,9 +13,11 @@ namespace RolePlayHelper.BLL.Services
     public class CharacterService
     {
         private readonly CharacterRepository _characterRepository;
-        public CharacterService(CharacterRepository characterRepository)  
+        private readonly RaceService _raceService;
+        public CharacterService(CharacterRepository characterRepository, RaceService raceService)  
         {
             _characterRepository = characterRepository;
+            _raceService = raceService;
         }
 
         public List<Character> getAll()
@@ -28,8 +31,13 @@ namespace RolePlayHelper.BLL.Services
             {
                 throw new CharacterAlreadyExistException($"Character with name {character.Name} already exists.");
             }
+
+           //character.Race = _raceService.GetOneById(character.RaceId);
             
-            // Modifying stats here...
+            if(character.Race.StatModifier != null)
+            {
+                CharacterTool.ApplyStatModifier(character, character.Race.StatModifier);
+            }
 
             _characterRepository.Add(character);
         }

@@ -12,7 +12,7 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    [Migration("20251015144452_Init")]
+    [Migration("20251016075801_Init")]
     partial class Init
     {
         /// <inheritdoc />

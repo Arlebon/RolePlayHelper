@@ -10,16 +10,30 @@ namespace RolePlayHelper.BLL.Services
         private readonly RaceRepository _raceRepository;
         private readonly LanguageRepository _languageRepository;
         private readonly RaceTraitRepository _raceTraitRepository;
-        public RaceService(RaceRepository raceRepository, LanguageRepository languageRepository, RaceTraitRepository raceTraitRepository)
+        private readonly StatModifierService _statModifierService;
+        public RaceService(RaceRepository raceRepository, LanguageRepository languageRepository, RaceTraitRepository raceTraitRepository, StatModifierService statModifierService)
         {
             _raceRepository = raceRepository;
             _languageRepository = languageRepository;
             _raceTraitRepository = raceTraitRepository;
+            _statModifierService = statModifierService;
         }
 
         public List<Race> GetAll()
         {
             return _raceRepository.GetAll().ToList();
+        }
+
+        public Race GetOneById(int id)
+        {
+            Race? race = _raceRepository.GetOne(id);
+
+            if(race == null)
+            {
+                throw new RaceNotFoundException($"The race with ID {id} doesn't exists");
+            }
+
+            return race;
         }
 
         public void Add(Race race) 
@@ -28,6 +42,8 @@ namespace RolePlayHelper.BLL.Services
             {
                 throw new RaceAlreadyExistsException($"Race with name {race.Name} already exists");
             }
+
+            //race.StatModifier = _statModifierService.GetOne(race.StatModifierId);
 
             List<Language> verifiedLanguages = new List<Language>();
 
