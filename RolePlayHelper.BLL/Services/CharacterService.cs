@@ -32,7 +32,7 @@ namespace RolePlayHelper.BLL.Services
                 throw new CharacterAlreadyExistException($"Character with name {character.Name} already exists.");
             }
 
-           //character.Race = _raceService.GetOneById(character.RaceId);
+           character.Race = _raceService.GetOneById(character.RaceId);
             
             if(character.Race.StatModifier != null)
             {

@@ -12,7 +12,7 @@ namespace RolePlayHelper.BLL.Tools
         public static void ApplyStatModifier(Character character, StatModifier modifier)
         {
             var statModifierProperties = typeof(StatModifier).GetProperties()
-                .Where(p => p.PropertyType == typeof(int) && p.Name != "Id");
+                .Where(p => p.PropertyType == typeof(int?) && p.Name != "Id");
 
             foreach (var prop in statModifierProperties)
             {

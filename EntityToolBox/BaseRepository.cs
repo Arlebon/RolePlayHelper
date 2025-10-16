@@ -23,7 +23,7 @@ namespace EntityToolBox
             return _set;
         }
 
-        public T? GetOne(int id)
+        public virtual T? GetOne(int id)
         {
             return _set.Find(id);
         }

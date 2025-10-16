@@ -20,5 +20,10 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set.Any(r => r.Name == name);
         }
+
+        public override Race? GetOne(int id)
+        {
+            return _set.Include(r => r.StatModifier).FirstOrDefault(r => r.Id == id);
+        }
     }
 }
