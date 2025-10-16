@@ -1,4 +1,5 @@
-﻿using RolePlayHelper.DAL.Repositories;
+﻿using RolePlayHelper.BLL.Exceptions.RaceTrait;
+using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 
 namespace RolePlayHelper.BLL.Services
@@ -18,6 +19,11 @@ namespace RolePlayHelper.BLL.Services
 
         public void Add(RaceTrait raceTrait)
         {
+            if(_raceTraitRepository.GetByName(raceTrait.Name) != null)
+            {
+                throw new RaceTraitAlreadyExistsException($"Race trait with name {raceTrait.Name} already exists");
+            }
+
             _raceTraitRepository.Add(raceTrait);
         }
     }

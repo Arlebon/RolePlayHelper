@@ -1,4 +1,5 @@
 ﻿using Isopoh.Cryptography.Argon2;
+using RolePlayHelper.BLL.Exceptions.User;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 namespace RolePlayHelper.BLL.Services
@@ -15,7 +16,7 @@ namespace RolePlayHelper.BLL.Services
         {
             if (_userRepository.ExistByUsername(newUser.UserName) || _userRepository.ExistByEmail(newUser.Email)) 
             {
-                throw new Exception("User with this username or email already exists");
+                throw new UserAlreadyExistsException("User with this username or email already exists");
             }
 
             newUser.Password = Argon2.Hash(newUser.Password);
@@ -28,12 +29,12 @@ namespace RolePlayHelper.BLL.Services
 
             if (user == null)
             {
-                throw new Exception("login failed");
+                throw new UserBadRequestException();
             }
 
             if (!Argon2.Verify(user.Password, password))
             {
-                throw new Exception("login failed");
+                throw new UserBadRequestException();
             }
 
             return user;

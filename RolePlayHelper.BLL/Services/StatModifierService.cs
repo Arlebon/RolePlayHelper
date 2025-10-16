@@ -1,4 +1,5 @@
-﻿using RolePlayHelper.DAL.Repositories;
+﻿using RolePlayHelper.BLL.Exceptions.StatModifier;
+using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace RolePlayHelper.BLL.Services
 
             if (statModifier == null)
             {
-                throw new Exception("Stat modifier doesn't exists");
+                throw new StatModifierNotFoundException($"Stat modifier with ID {id} doesn't exists");
             }
 
             return statModifier;

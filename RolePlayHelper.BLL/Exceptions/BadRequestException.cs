@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RolePlayHelper.BLL.Exceptions
 {
-    public abstract class AlreadyExistsException : RolePlayHelperException
+    public abstract class BadRequestException : RolePlayHelperException
     {
-        public AlreadyExistsException(object content) : base(409, content)
+        public BadRequestException(object content) : base(400, content)
         {
 
         }
