@@ -19,7 +19,12 @@ namespace RolePlayHelper.API.Controllers
         [HttpGet]
         public ActionResult<List<Character>> GetAll()
         {
-            List<CharClassListDto> characters = _charClassService.getAll().Select(c => c.ToCharClassListDto()).Where(c=>c.ParentClass == null).ToList();
+            List<CharClassListDto> characters = _charClassService
+                .getAll()
+                .Select(c => c.ToCharClassListDto())
+                .Where(c=>c.ParentClass == null) //Je ne veux pas reafficher les subclasses après les parent classes. Mais dans Parentclasses
+                .ToList();
+
             return Ok(characters);
         }
 

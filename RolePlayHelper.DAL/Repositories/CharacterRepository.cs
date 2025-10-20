@@ -11,10 +11,11 @@ namespace RolePlayHelper.DAL.Repositories
         {
         }
 
-        public override IEnumerable<Character> GetAll()
+        public override List<Character> GetAll()
         {
             return _set
                 .Include(c => c.Classes)
+                .ThenInclude(c => c.SubClasses)
                 .Include(c => c.Race)
                 .ToList();
         }  

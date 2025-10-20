@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/RolePlayHelper.API/Mappers/CharacterMapper.cs
+/RolePlayHelper.API/Models/Character/CharacterFormDto.cs
+/RolePlayHelper.API/Models/Character/CharacterListDto.cs
