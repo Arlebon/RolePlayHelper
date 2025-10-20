@@ -29,6 +29,11 @@ namespace RolePlayHelper.API.Controllers
         [Authorize]
         public ActionResult Add([FromBody] CharacterFormDto form)
         {
+
+            // PROBLEM: we are transforming charaktform containing list of ClassIds to Character containing list of Classes.
+            // To be able to map these correctly we need the form.
+            // This means we need the form in our service? Not the tranformed Character??
+
             _characterService.Add(form.ToCharacter());
             return Created();
         }

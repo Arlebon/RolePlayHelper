@@ -1,4 +1,5 @@
 ﻿using EntityToolBox;
+using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.DL.Entities;
 
@@ -9,6 +10,16 @@ namespace RolePlayHelper.DAL.Repositories
         public CharacterRepository(RolePlayHelperContext context) : base(context)
         {
         }
+
+        public override List<Character> GetAll()
+        {
+            return _set
+                .Include(c => c.Classes)
+                .ThenInclude(c => c.SubClasses)
+                .Include(c => c.Race)
+                .ToList();
+        }  
+
 
         public bool ExistByName(string name)
         {
