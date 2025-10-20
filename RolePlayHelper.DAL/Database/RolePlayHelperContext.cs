@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RolePlayHelper.DAL.Database
 {
@@ -14,6 +9,7 @@ namespace RolePlayHelper.DAL.Database
         {
 
         }
+        public DbSet<CharClass> Classes { get; set; }
         public DbSet<Character> Characters{ get; set; }
         public DbSet<User> Users { get; set; }
 

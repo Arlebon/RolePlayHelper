@@ -33,5 +33,7 @@
 
         public int RaceId { get; set; }
         public Race Race { get; set; } = null!;
+
+        public List<CharClass> classes { get; set; } = new();
     }
 }

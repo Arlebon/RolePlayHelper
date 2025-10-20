@@ -6,9 +6,12 @@
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
 
+        // On CharClass can be assigned to many characters
+        public List<Character> Characters { get; set; } = new();
 
-        // A Character (Sub)Class can have a parentClass
-        public int? ParentCharacterId { get; set; }
+
+        // A (Sub)Class can have a parentClass
+        public int? ParentClassId { get; set; }
         public CharClass? ParentClass { get; set; }
 
         // A ParentClass can have severall Subclasses
