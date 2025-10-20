@@ -18,7 +18,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public ActionResult<List<Character>> GetAll()
         {
             List<CharacterListDto> characters = _characterService.getAll().Select(c => c.ToCharacterListDto()).ToList();
@@ -26,7 +26,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPost("Add-Character")]
-        [Authorize]
+        //[Authorize]
         public ActionResult Add([FromBody] CharacterFormDto form)
         {
 

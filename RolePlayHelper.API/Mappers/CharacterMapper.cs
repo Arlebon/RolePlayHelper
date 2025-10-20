@@ -12,6 +12,9 @@ namespace RolePlayHelper.API.Mappers
                 Id = character.Id,
                 Name = character.Name,
                 RaceName = character.Race.Name,
+                ClassNames = character.Classes.Select(c => c.Name).ToList(),
+                SubClasses = character.Classes.Where(c => c.ParentClassId != null).Select(c => c.Name).ToList(),
+
             };
         }
 
@@ -27,6 +30,10 @@ namespace RolePlayHelper.API.Mappers
                 CON = form.CON,
                 WIS = form.WIS,
                 RaceId = form.RaceId,
+                ClassIds = form.CharClassIds,
+                Classes = new List<CharClass>(),
+                SubClassIds = form.SubClassIds,
+                SubClasses = new List<CharClass>(),
             };
         }
     }
