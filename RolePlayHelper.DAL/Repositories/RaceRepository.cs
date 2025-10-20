@@ -23,7 +23,7 @@ namespace RolePlayHelper.DAL.Repositories
 
         public override Race? GetOne(int id)
         {
-            return _set.Include(r => r.StatModifier).FirstOrDefault(r => r.Id == id);
+            return _set.Include(r => r.StatModifier).Include(r => r.Languages).Include(r => r.Traits).FirstOrDefault(r => r.Id == id);
         }
     }
 }

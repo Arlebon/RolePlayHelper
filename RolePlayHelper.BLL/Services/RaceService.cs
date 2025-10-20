@@ -85,5 +85,60 @@ namespace RolePlayHelper.BLL.Services
 
             _raceRepository.Add(race);
         }
+
+        public void Delete(Race race)
+        {
+            if (_raceRepository.GetOne(race.Id) == null)
+            {
+                throw new RaceNotFoundException($"Race with ID {race.Id} doesn't exist");
+            }
+            
+            _raceRepository.Delete(race);
+        }
+
+        public void Update(int id, Race race)
+        {
+            Race? existing = _raceRepository.GetOne(id);
+
+            if (existing == null)
+            {
+                throw new RaceNotFoundException($"Race with ID {id} doesn't exist");
+            }
+
+            existing.Name = race.Name;
+            existing.Description = race.Description;
+            existing.StatModifierId = race.StatModifierId;
+            existing.StatModifier = race.StatModifier;
+
+            List<Language> raceLanguages = new List<Language>();
+
+            raceLanguages = race.Languages.Select(l => _languageRepository.GetByName(l.Name) ?? l).ToList();
+
+            existing.Languages.RemoveAll(l => !raceLanguages.Any(rl => rl.Id == l.Id));
+
+            raceLanguages.ForEach(l =>
+            {
+                if (!existing.Languages.Any(el => el.Id == l.Id))
+                {
+                    existing.Languages.Add(l);
+                }
+            });
+
+            List<RaceTrait> raceTraits = new List<RaceTrait>();
+
+            raceTraits = race.Traits.Select(t => _raceTraitRepository.GetByName(t.Name) ?? t).ToList();
+
+            existing.Traits.RemoveAll(t => !raceTraits.Any(rt => rt.Id == t.Id));
+
+            raceTraits.ForEach(t =>
+            {
+                if (!existing.Traits.Any(et => et.Id == t.Id))
+                {
+                    existing.Traits.Add(t);
+                }
+            });
+
+            _raceRepository.Update(existing);
+        }
     }
 }

@@ -33,5 +33,21 @@ namespace RolePlayHelper.API.Controllers
             _raceService.Add(form.ToRace());
             return Created();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute] int id)
+        {
+            Race race = _raceService.GetOneById(id);
+            _raceService.Delete(race);
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Update([FromRoute] int id,  [FromBody] RaceFormDto form)
+        {
+            _raceService.Update(id, form.ToRace());
+            return Ok();
+        }
     }
 }
