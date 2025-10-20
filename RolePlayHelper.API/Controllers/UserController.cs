@@ -20,7 +20,6 @@ namespace RolePlayHelper.API.Controllers
             _authService = authService;
         }
 
-        [Authorize]
         [HttpPost("register")]
         public ActionResult Register([FromBody] UserRegisterFormDto form)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.RaceTrait;
 using RolePlayHelper.BLL.Services;
@@ -24,6 +25,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Add([FromBody] RaceTraitFormDto form)
         {
             _raceTraitService.Add(form.ToRaceTrait());

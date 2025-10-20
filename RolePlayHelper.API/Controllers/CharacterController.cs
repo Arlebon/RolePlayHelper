@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.Character;
 using RolePlayHelper.BLL.Services;
@@ -17,6 +18,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<List<Character>> GetAll()
         {
             List<CharacterListDto> characters = _characterService.getAll().Select(c => c.ToCharacterListDto()).ToList();
@@ -24,6 +26,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPost("Add-Character")]
+        [Authorize]
         public ActionResult Add([FromBody] CharacterFormDto form)
         {
             _characterService.Add(form.ToCharacter());

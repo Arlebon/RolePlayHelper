@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.Race;
@@ -26,6 +27,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPost("Add")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Add([FromBody] RaceFormDto form)
         {
             _raceService.Add(form.ToRace());

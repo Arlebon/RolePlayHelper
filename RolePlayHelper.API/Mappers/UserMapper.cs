@@ -1,5 +1,6 @@
 ﻿using RolePlayHelper.API.Models.User;
 using RolePlayHelper.DL.Entities;
+using RolePlayHelper.DL.Enums;
 
 namespace RolePlayHelper.API.Mappers
 {
@@ -12,6 +13,7 @@ namespace RolePlayHelper.API.Mappers
                 Email = user.Email,
                 Password = user.Password,
                 UserName = user.Username,
+                Role = Role.User,
             };
         }
     }

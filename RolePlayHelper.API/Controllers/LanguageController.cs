@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.Language;
 using RolePlayHelper.BLL.Services;
@@ -24,6 +25,7 @@ namespace RolePlayHelper.API.Controllers
             return Ok(languages);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Add([FromBody] LanguageFormDto formDto)
         {
