@@ -11,6 +11,6 @@
         public CharClassListDto? ParentClass { get; set; }
 
 
-        public List<CharClassListDto>? SubClasses { get; set; } = new();
+        public List<SubClassListDto>? SubClasses { get; set; } = new();
     }
 }

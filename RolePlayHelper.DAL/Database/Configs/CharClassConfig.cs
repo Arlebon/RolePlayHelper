@@ -31,7 +31,7 @@ namespace RolePlayHelper.DAL.Database.Configs
                 .IsUnique();
 
             builder.HasMany(cl => cl.Characters)
-                .WithMany(cha => cha.classes)
+                .WithMany(cha => cha.Classes)
                 .UsingEntity(j => j.ToTable("Character_Class_Link"));
 
             builder.HasOne(cl => cl.ParentClass)

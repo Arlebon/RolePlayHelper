@@ -19,7 +19,7 @@ namespace RolePlayHelper.API.Controllers
         [HttpGet]
         public ActionResult<List<Character>> GetAll()
         {
-            List<CharClassListDto> characters = _charClassService.getAll().Select(c => c.ToCharClassListDto()).ToList();
+            List<CharClassListDto> characters = _charClassService.getAll().Select(c => c.ToCharClassListDto()).Where(c=>c.ParentClass == null).ToList();
             return Ok(characters);
         }
 

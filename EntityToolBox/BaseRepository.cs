@@ -18,7 +18,7 @@ namespace EntityToolBox
             _set = _context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _set;
         }

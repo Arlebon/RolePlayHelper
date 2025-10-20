@@ -9,6 +9,7 @@ namespace RolePlayHelper.API.Mappers
         {
             return new CharClassListDto()
             {
+                Id = charClass.Id,
                 Description = charClass.Description,
                 Name = charClass.Name,
                 ParentClassId = charClass.ParentClassId,
@@ -22,8 +23,8 @@ namespace RolePlayHelper.API.Mappers
                     }
                     : null,
                 SubClasses = charClass.SubClasses?
-                    .Select(scl => scl.ToCharClassListDto())
-                    .ToList() ?? new List<CharClassListDto>() // Si ma liste est null je crée un liste vide
+                    .Select(scl => scl.ToSubClassListDto())
+                    .ToList() ?? new List<SubClassListDto>() // Si ma liste est null je crée un liste vide
             };
         }
 
@@ -34,6 +35,16 @@ namespace RolePlayHelper.API.Mappers
                 Name = form.Name,
                 Description = form.Description,
                 ParentClassId = form.ParentClassId,
+            };
+        }
+
+        public static SubClassListDto ToSubClassListDto(this CharClass charClass)
+        {
+            return new SubClassListDto()
+            {
+                Id = charClass.Id,
+                Name = charClass.Name,
+                Description = charClass.Description
             };
         }
     }

@@ -5,6 +5,12 @@
         public int Id { get; set; }
         public string Name { get; set; } = null!;
 
+
+        public List<int> ClassIds { get; set; } = new();
+        public List<CharClass> Classes { get; set; } = new();
+        public Race Race { get; set; } = null!;
+
+        #region stats
         public int STR { get; set; }
 
         public int DEX { get; set; }
@@ -14,8 +20,10 @@
         public int INT { get; set; }
 
         public int CON { get; set; }
-
         public int WIS { get; set; }
+
+        #endregion
+
 
         public int MVT { get; set; }
 
@@ -32,8 +40,6 @@
         public int SpellSave { get; set; }
 
         public int RaceId { get; set; }
-        public Race Race { get; set; } = null!;
 
-        public List<CharClass> classes { get; set; } = new();
     }
 }

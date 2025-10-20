@@ -22,6 +22,9 @@ namespace RolePlayHelper.DAL.Database.Configs
             builder.HasOne(c => c.Race)
                 .WithMany(r => r.Characters)
                 .HasForeignKey(c => c.RaceId);
+
+            builder.HasMany(c => c.Classes)
+                .WithMany(cl => cl.Characters);
         }
     }
 }

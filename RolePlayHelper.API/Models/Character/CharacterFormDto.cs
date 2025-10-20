@@ -1,4 +1,5 @@
 ﻿using RolePlayHelper.API.Models.Race;
+using RolePlayHelper.DL.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace RolePlayHelper.API.Models.Character
@@ -14,6 +15,12 @@ namespace RolePlayHelper.API.Models.Character
         public int RaceId { get; set; }
 
         [Required]
+        public List<int> CharClassIds { get; set; } = new();
+
+        // TO DO: VERIFICATION IF SUBLASS_PARENTCLASSID MATCH
+        public int? SubClassId { get; set; }
+
+        [Required]
         public int STR { get; set; }
         [Required]
         public int DEX { get; set; }
@@ -25,5 +32,6 @@ namespace RolePlayHelper.API.Models.Character
         public int CON {  get; set; }
         [Required]
         public int WIS { get; set; }
+
     }
 }
