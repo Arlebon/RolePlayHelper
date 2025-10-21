@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RolePlayHelper.DAL.Database;
 
@@ -11,9 +12,11 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    partial class RolePlayHelperContextModelSnapshot : ModelSnapshot
+    [Migration("20251016093202_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace RolePlayHelper.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CharClassCharacter", b =>
-                {
-                    b.Property<int>("CharactersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClassesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CharactersId", "ClassesId");
-
-                    b.HasIndex("ClassesId");
-
-                    b.ToTable("Character_Class_Link", (string)null);
-                });
 
             modelBuilder.Entity("LanguageRace", b =>
                 {
@@ -67,37 +55,6 @@ namespace RolePlayHelper.DAL.Migrations
                     b.ToTable("Race_Traits", (string)null);
                 });
 
-            modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("ParentClassId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("ParentClassId");
-
-                    b.ToTable("Character_Class", (string)null);
-                });
-
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
                 {
                     b.Property<int>("Id")
@@ -114,10 +71,6 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.Property<int>("CON")
                         .HasColumnType("int");
-
-                    b.Property<string>("ClassIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DEX")
                         .HasColumnType("int");
@@ -345,21 +298,6 @@ namespace RolePlayHelper.DAL.Migrations
                     b.ToTable("User_", (string)null);
                 });
 
-            modelBuilder.Entity("CharClassCharacter", b =>
-                {
-                    b.HasOne("RolePlayHelper.DL.Entities.Character", null)
-                        .WithMany()
-                        .HasForeignKey("CharactersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RolePlayHelper.DL.Entities.CharClass", null)
-                        .WithMany()
-                        .HasForeignKey("ClassesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("LanguageRace", b =>
                 {
                     b.HasOne("RolePlayHelper.DL.Entities.Language", null)
@@ -390,16 +328,6 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
-                {
-                    b.HasOne("RolePlayHelper.DL.Entities.CharClass", "ParentClass")
-                        .WithMany("SubClasses")
-                        .HasForeignKey("ParentClassId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("ParentClass");
-                });
-
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
                 {
                     b.HasOne("RolePlayHelper.DL.Entities.Race", "Race")
@@ -420,11 +348,6 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("StatModifier");
-                });
-
-            modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
-                {
-                    b.Navigation("SubClasses");
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Race", b =>

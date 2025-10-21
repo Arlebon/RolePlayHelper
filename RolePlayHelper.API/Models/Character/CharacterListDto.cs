@@ -6,8 +6,5 @@
         public string Name { get; set; } = null!;
         public string RaceName { get; set; } = null!;
 
-        public List<string> ClassNames { get; set; } = new();
-
-        public List<string> SubClasses { get; set; } = new();
     }
 }

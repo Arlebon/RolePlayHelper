@@ -5,32 +5,11 @@
 namespace RolePlayHelper.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class _211025 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Character_Class",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    ParentClassId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Character_Class", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Character_Class_Character_Class_ParentClassId",
-                        column: x => x.ParentClassId,
-                        principalTable: "Character_Class",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Language",
                 columns: table => new
@@ -130,8 +109,6 @@ namespace RolePlayHelper.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClassIds = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubClassIds = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     STR = table.Column<int>(type: "int", nullable: false),
                     DEX = table.Column<int>(type: "int", nullable: false),
                     CHA = table.Column<int>(type: "int", nullable: false),
@@ -207,30 +184,6 @@ namespace RolePlayHelper.DAL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Character_Class_Link",
-                columns: table => new
-                {
-                    CharactersId = table.Column<int>(type: "int", nullable: false),
-                    ClassesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Character_Class_Link", x => new { x.CharactersId, x.ClassesId });
-                    table.ForeignKey(
-                        name: "FK_Character_Class_Link_Character_CharactersId",
-                        column: x => x.CharactersId,
-                        principalTable: "Character",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Character_Class_Link_Character_Class_ClassesId",
-                        column: x => x.ClassesId,
-                        principalTable: "Character_Class",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Character_Name",
                 table: "Character",
@@ -241,22 +194,6 @@ namespace RolePlayHelper.DAL.Migrations
                 name: "IX_Character_RaceId",
                 table: "Character",
                 column: "RaceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Character_Class_Name",
-                table: "Character_Class",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Character_Class_ParentClassId",
-                table: "Character_Class",
-                column: "ParentClassId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Character_Class_Link_ClassesId",
-                table: "Character_Class_Link",
-                column: "ClassesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Language_Name",
@@ -309,7 +246,7 @@ namespace RolePlayHelper.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Character_Class_Link");
+                name: "Character");
 
             migrationBuilder.DropTable(
                 name: "Race_Languages");
@@ -319,12 +256,6 @@ namespace RolePlayHelper.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "User_");
-
-            migrationBuilder.DropTable(
-                name: "Character");
-
-            migrationBuilder.DropTable(
-                name: "Character_Class");
 
             migrationBuilder.DropTable(
                 name: "Language");

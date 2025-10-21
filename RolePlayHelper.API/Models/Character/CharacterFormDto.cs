@@ -14,12 +14,6 @@ namespace RolePlayHelper.API.Models.Character
         public int RaceId { get; set; }
 
         [Required]
-        public List<int> CharClassIds { get; set; } = new();
-
-        // TO DO: VERIFICATION IF SUBLASS_PARENTCLASSID MATCH
-        public List<int> SubClassIds { get; set; } = new();
-
-        [Required]
         public int STR { get; set; }
         [Required]
         public int DEX { get; set; }
