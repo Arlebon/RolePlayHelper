@@ -153,6 +153,10 @@ namespace RolePlayHelper.DAL.Migrations
                     b.Property<int>("SpellSave")
                         .HasColumnType("int");
 
+                    b.Property<string>("SubClassIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("WIS")
                         .HasColumnType("int");
 
