@@ -34,7 +34,7 @@ namespace RolePlayHelper.BLL.Services
             // TO VERIFY
             character.ClassIds.ForEach(cid =>
             {
-                CharClass? charClass = _charClassRepository.GetOne(cid);
+                CharClass? charClass = _charClassRepository.GetOne(cid); // Utilisation du service plutôt que le repo, pour éviter le test si null
                 if (charClass == null)
                 {
                     throw new NotImplementedException();

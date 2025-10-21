@@ -35,6 +35,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete([FromRoute] int id)
         {
             Race race = _raceService.GetOneById(id);
@@ -44,6 +45,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Update([FromRoute] int id,  [FromBody] RaceFormDto form)
         {
             _raceService.Update(id, form.ToRace());
