@@ -15,7 +15,6 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set
                 .Include(c => c.Classes)
-                .ThenInclude(c => c.SubClasses)
                 .Include(c => c.Race)
                 .ToList();
         }  

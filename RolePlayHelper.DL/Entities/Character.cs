@@ -1,4 +1,6 @@
-﻿namespace RolePlayHelper.DL.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RolePlayHelper.DL.Entities
 {
     public class Character
     {
@@ -8,6 +10,12 @@
 
         public List<int> ClassIds { get; set; } = new();
         public List<CharClass> Classes { get; set; } = new();
+
+        public List<int> SubClassIds { get; set; } = new();
+        [NotMapped]
+        public List<CharClass> SubClasses { get; set; } = new();
+
+
         public Race Race { get; set; } = null!;
 
         #region stats
