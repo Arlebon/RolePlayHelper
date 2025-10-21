@@ -12,8 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    [Migration("20251020081609_Character_Class_added")]
-    partial class Character_Class_added
+    [Migration("20251021135540_21-10-25")]
+    partial class _211025
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,12 +30,12 @@ namespace RolePlayHelper.DAL.Migrations
                     b.Property<int>("CharactersId")
                         .HasColumnType("int");
 
-                    b.Property<int>("classesId")
+                    b.Property<int>("ClassesId")
                         .HasColumnType("int");
 
-                    b.HasKey("CharactersId", "classesId");
+                    b.HasKey("CharactersId", "ClassesId");
 
-                    b.HasIndex("classesId");
+                    b.HasIndex("ClassesId");
 
                     b.ToTable("Character_Class_Link", (string)null);
                 });
@@ -118,6 +118,10 @@ namespace RolePlayHelper.DAL.Migrations
                     b.Property<int>("CON")
                         .HasColumnType("int");
 
+                    b.Property<string>("ClassIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DEX")
                         .HasColumnType("int");
 
@@ -151,6 +155,10 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.Property<int>("SpellSave")
                         .HasColumnType("int");
+
+                    b.Property<string>("SubClassIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WIS")
                         .HasColumnType("int");
@@ -354,7 +362,7 @@ namespace RolePlayHelper.DAL.Migrations
 
                     b.HasOne("RolePlayHelper.DL.Entities.CharClass", null)
                         .WithMany()
-                        .HasForeignKey("classesId")
+                        .HasForeignKey("ClassesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

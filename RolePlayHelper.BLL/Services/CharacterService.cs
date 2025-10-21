@@ -42,6 +42,16 @@ namespace RolePlayHelper.BLL.Services
                 character.Classes.Add(charClass);
             });
 
+            character.SubClassIds.ForEach(sid =>
+            {
+                CharClass? charClass = _charClassRepository.GetOne(sid);
+                if (charClass == null)
+                {
+                    throw new NotImplementedException();
+                }
+                character.Classes.Add(charClass);
+            });
+
             if(character.Race.StatModifier != null)
             {
                 CharacterTool.ApplyStatModifier(character, character.Race.StatModifier);
