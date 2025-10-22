@@ -8,6 +8,5 @@
 
         public List<string> ClassNames { get; set; } = new();
 
-        public List<string> SubClasses { get; set; } = new();
     }
 }

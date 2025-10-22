@@ -1,21 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
+﻿
 namespace RolePlayHelper.DL.Entities
 {
     public class Character
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public bool IsPublic { get; set; } = true;
 
+        // Many Characters to one User
+        public int UserId { get; set; }
+        public User User { get; set; } = null!;
 
+        // Many Classes to many Characters
         public List<int> ClassIds { get; set; } = new();
         public List<CharClass> Classes { get; set; } = new();
 
-        public List<int> SubClassIds { get; set; } = new();
-        [NotMapped]
-        public List<CharClass> SubClasses { get; set; } = new();
-
-
+        // One Race to many Characters
+        public int RaceId { get; set; }
         public Race Race { get; set; } = null!;
 
         #region stats
@@ -32,7 +33,7 @@ namespace RolePlayHelper.DL.Entities
 
         #endregion
 
-
+        #region calculated fields
         public int MVT { get; set; }
 
         public int MaxHP { get; set; }
@@ -47,7 +48,6 @@ namespace RolePlayHelper.DL.Entities
 
         public int SpellSave { get; set; }
 
-        public int RaceId { get; set; }
-
+        #endregion
     }
 }
