@@ -200,8 +200,9 @@ namespace RolePlayHelper.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsPublic = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     ClassIds = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubClassIds = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RaceId = table.Column<int>(type: "int", nullable: false),
                     CampaignId = table.Column<int>(type: "int", nullable: true),
                     STR = table.Column<int>(type: "int", nullable: false),
@@ -231,6 +232,12 @@ namespace RolePlayHelper.DAL.Migrations
                         name: "FK_Character_Race_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Race",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Character_User__UserId",
+                        column: x => x.UserId,
+                        principalTable: "User_",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -285,6 +292,11 @@ namespace RolePlayHelper.DAL.Migrations
                 name: "IX_Character_RaceId",
                 table: "Character",
                 column: "RaceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Character_UserId",
+                table: "Character",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Character_Class_Name",

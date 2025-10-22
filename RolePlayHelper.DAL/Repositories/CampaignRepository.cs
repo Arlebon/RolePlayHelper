@@ -2,11 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.DL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RolePlayHelper.DAL.Repositories
 {
@@ -15,6 +10,13 @@ namespace RolePlayHelper.DAL.Repositories
         public CampaignRepository(RolePlayHelperContext context) : base(context) 
         {
 
+        }
+
+        public void AddCharacterToCampaign(Character character, Campaign campaign)
+        {
+            character.CurrentCampaign = campaign;
+            _context.Update(character);
+            _context.SaveChanges();
         }
 
         public bool ExistByName(string name)

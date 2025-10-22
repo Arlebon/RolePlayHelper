@@ -25,6 +25,7 @@ namespace RolePlayHelper.DAL.Repositories
                 .Where(c => c.UserId == userId)
                 .Include(c => c.Classes)
                 .Include(c => c.Race)
+                .Include(c => c.CurrentCampaign)
                 .ToList();
         }
 

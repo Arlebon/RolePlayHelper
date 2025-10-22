@@ -51,12 +51,7 @@ namespace RolePlayHelper.API.Controllers
             return Ok(new {token});
         }
 
-        [HttpGet("{userId}/List-Characters")]
-        public ActionResult<List<CharacterListDto>> ListCharactersByUser([FromRoute] int userId)
-        {
-            List<CharacterListDto> characters = _characterService.GetAllByUserId(userId).Select(c => c.ToCharacterListDto()).ToList();
-            return Ok(characters);
-        }
+        
 
     }
 }

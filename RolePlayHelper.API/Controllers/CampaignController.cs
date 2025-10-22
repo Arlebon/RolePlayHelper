@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.Campaign;
@@ -31,6 +30,18 @@ namespace RolePlayHelper.API.Controllers
             return Created();
         }
 
+        [HttpPost("{campaignId}/Enter-Campaign")]
+        [Authorize]
+        public ActionResult EnterCampaign([FromRoute]int campaignId, [FromBody] CampaignSubscriptionFormDto form)
+        {
+
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.Sid)!);
+
+            _campaignService.AddCharacterToCampaign(userId, campaignId, form.CharacterId);
+
+            return NoContent();
+        }
+
         [HttpGet("{id}/Characters")]
         public ActionResult GetCharactersByCampaign([FromRoute] int id)
         {
@@ -39,4 +50,5 @@ namespace RolePlayHelper.API.Controllers
             return Ok(characters);
         }
     }
+
 }

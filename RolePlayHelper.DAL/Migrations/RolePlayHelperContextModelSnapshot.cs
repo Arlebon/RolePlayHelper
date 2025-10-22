@@ -476,6 +476,8 @@ namespace RolePlayHelper.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("CurrentCampaign");
+
                     b.Navigation("Race");
 
                     b.Navigation("User");
@@ -514,12 +516,9 @@ namespace RolePlayHelper.DAL.Migrations
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.User", b =>
                 {
-                    b.Navigation("Characters");
-                });
-
-            modelBuilder.Entity("RolePlayHelper.DL.Entities.User", b =>
-                {
                     b.Navigation("CampaignsAsGM");
+
+                    b.Navigation("Characters");
                 });
 #pragma warning restore 612, 618
         }

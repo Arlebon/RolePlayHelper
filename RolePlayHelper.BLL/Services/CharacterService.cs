@@ -5,7 +5,7 @@ using RolePlayHelper.DL.Entities;
 
 namespace RolePlayHelper.BLL.Services
 {
-    public class CharacterService
+    public class CharacterService 
     {
         private readonly CharacterRepository _characterRepository;
         private readonly RaceService _raceService;
@@ -71,6 +71,21 @@ namespace RolePlayHelper.BLL.Services
             character.IsPublic = isPublic;
 
             _characterRepository.Update(character);
+        }
+
+        internal bool ExistByUserId(int userId)
+        {
+            return _characterRepository.ExistByUserId(userId);
+        }
+
+        internal Character? GetOne(int characterId)
+        {
+            Character? character = _characterRepository.GetOne(characterId);
+            if (character == null)
+            {
+                throw new CharacterNotFoundException(characterId);
+            }
+            return character;
         }
     }
 }
