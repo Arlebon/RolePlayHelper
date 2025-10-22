@@ -65,6 +65,7 @@ namespace RolePlayHelper.API
             builder.Services.AddScoped<LanguageRepository>();
             builder.Services.AddScoped<CharacterRepository>();
             builder.Services.AddScoped<CharClassRepository>();
+            builder.Services.AddScoped<CampaignRepository>();
             
             #endregion
 
@@ -77,6 +78,7 @@ namespace RolePlayHelper.API
             builder.Services.AddScoped<CharacterService>();
             builder.Services.AddScoped<StatModifierService>();
             builder.Services.AddScoped<CharClassService>();
+            builder.Services.AddScoped<CampaignService>();
             #endregion
 
 

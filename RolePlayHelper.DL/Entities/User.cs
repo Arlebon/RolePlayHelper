@@ -18,5 +18,7 @@ namespace RolePlayHelper.DL.Entities
         public string Password { get; set; } = null!;
 
         public Role Role { get; set; }
+
+        public List<Campaign> CampaignsAsGM { get; set; } = new List<Campaign>();
     }
 }

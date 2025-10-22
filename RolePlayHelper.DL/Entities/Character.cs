@@ -15,8 +15,12 @@ namespace RolePlayHelper.DL.Entities
         [NotMapped]
         public List<CharClass> SubClasses { get; set; } = new();
 
-
+        public int RaceId { get; set; }
         public Race Race { get; set; } = null!;
+
+        public int? CampaignId { get; set; }
+
+        public Campaign? CurrentCampaign { get; set; }
 
         #region stats
         public int STR { get; set; }
@@ -47,7 +51,6 @@ namespace RolePlayHelper.DL.Entities
 
         public int SpellSave { get; set; }
 
-        public int RaceId { get; set; }
 
     }
 }

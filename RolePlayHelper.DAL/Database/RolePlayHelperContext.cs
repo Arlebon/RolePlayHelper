@@ -17,6 +17,8 @@ namespace RolePlayHelper.DAL.Database
 
         public DbSet<StatModifier> StatModifiers { get; set; }
 
+        public DbSet<Campaign> Campaigns { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RolePlayHelperContext).Assembly);
