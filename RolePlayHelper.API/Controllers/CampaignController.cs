@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.Campaign;
+using RolePlayHelper.API.Models.Character;
 using RolePlayHelper.BLL.Services;
 using System.Security.Claims;
 
@@ -28,6 +29,14 @@ namespace RolePlayHelper.API.Controllers
             _campaignService.Create(form.ToCampaign(), gmId);
 
             return Created();
+        }
+
+        [HttpGet("{id}/Characters")]
+        public ActionResult GetCharactersByCampaign([FromRoute] int id)
+        {
+            List<CharacterByCampaignListDto> characters = _campaignService.GetCharactersByCampaign(id).Select(c => c.ToCharacterByCampaignListDto()).ToList();
+
+            return Ok(characters);
         }
     }
 }

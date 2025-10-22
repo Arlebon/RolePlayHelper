@@ -27,7 +27,7 @@ namespace RolePlayHelper.DAL.Database.Configs
             builder.HasIndex(c => c.Name)
                 .IsUnique();
 
-            builder.HasMany(c => c.Charcacters)
+            builder.HasMany(c => c.Characters)
                 .WithOne(ch => ch.CurrentCampaign)
                 .HasForeignKey(ch => ch.CampaignId);
 

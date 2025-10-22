@@ -18,6 +18,6 @@ namespace RolePlayHelper.DL.Entities
 
         public int MaxCharNb { get; set; }
 
-        public List<Character> Charcacters { get; set; } = new List<Character>();
+        public List<Character> Characters { get; set; } = new List<Character>();
     }
 }

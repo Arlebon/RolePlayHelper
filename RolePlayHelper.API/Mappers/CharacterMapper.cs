@@ -32,5 +32,16 @@ namespace RolePlayHelper.API.Mappers
                 Classes = new List<CharClass>(),
             };
         }
+
+        public static CharacterByCampaignListDto ToCharacterByCampaignListDto(this Character character)
+        {
+            return new CharacterByCampaignListDto()
+            {
+                Id = character.Id,
+                Name = character.Name,
+                Race = character.Race.Name,
+                Classes = character.Classes.Select(c => c.Name).ToList(),
+            };
+        }
     }
 }

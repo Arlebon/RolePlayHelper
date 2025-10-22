@@ -29,5 +29,15 @@ namespace RolePlayHelper.BLL.Services
 
             _campaignRepository.Add(campaign);
         }
+
+        public List<Character> GetCharactersByCampaign(int id)
+        {
+            if (_campaignRepository.GetOne(id) == null)
+            {
+                throw new CampaignNotFoundException($"Campaing with ID {id} not found");
+            }
+
+            return _campaignRepository.GetCharactersByCampaign(id);
+        }
     }
 }
