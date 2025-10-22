@@ -12,8 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    [Migration("20251022081821_char-user")]
-    partial class charuser
+    [Migration("20251022091412_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,38 @@ namespace RolePlayHelper.DAL.Migrations
                     b.ToTable("Race_Traits", (string)null);
                 });
 
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Campaign", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GMId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxCharNb")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Campaign");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
+                    b.HasIndex("GMId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Campaign", (string)null);
+                });
+
             modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
                 {
                     b.Property<int>("Id")
@@ -116,6 +148,9 @@ namespace RolePlayHelper.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CON")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CampaignId")
                         .HasColumnType("int");
 
                     b.Property<string>("ClassIds")
@@ -171,6 +206,8 @@ namespace RolePlayHelper.DAL.Migrations
                         .HasName("PK_Character");
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
+                    b.HasIndex("CampaignId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -403,6 +440,17 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Campaign", b =>
+                {
+                    b.HasOne("RolePlayHelper.DL.Entities.User", "GM")
+                        .WithMany("CampaignsAsGM")
+                        .HasForeignKey("GMId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GM");
+                });
+
             modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
                 {
                     b.HasOne("RolePlayHelper.DL.Entities.CharClass", "ParentClass")
@@ -415,6 +463,10 @@ namespace RolePlayHelper.DAL.Migrations
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
                 {
+                    b.HasOne("RolePlayHelper.DL.Entities.Campaign", "CurrentCampaign")
+                        .WithMany("Charcacters")
+                        .HasForeignKey("CampaignId");
+
                     b.HasOne("RolePlayHelper.DL.Entities.Race", "Race")
                         .WithMany("Characters")
                         .HasForeignKey("RaceId")
@@ -426,6 +478,8 @@ namespace RolePlayHelper.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CurrentCampaign");
 
                     b.Navigation("Race");
 
@@ -441,6 +495,11 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("StatModifier");
+                });
+
+            modelBuilder.Entity("RolePlayHelper.DL.Entities.Campaign", b =>
+                {
+                    b.Navigation("Charcacters");
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
@@ -460,6 +519,8 @@ namespace RolePlayHelper.DAL.Migrations
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.User", b =>
                 {
+                    b.Navigation("CampaignsAsGM");
+
                     b.Navigation("Characters");
                 });
 #pragma warning restore 612, 618

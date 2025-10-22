@@ -13,6 +13,7 @@ namespace RolePlayHelper.API.Mappers
                 Name = character.Name,
                 RaceName = character.Race.Name,
                 ClassNames = character.Classes.Select(c => c.Name).ToList(),
+                CampaignName = character.CurrentCampaign?.Name,
             };
         }
 

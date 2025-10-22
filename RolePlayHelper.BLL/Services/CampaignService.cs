@@ -1,21 +1,38 @@
-﻿using RolePlayHelper.BLL.Exceptions.Campaign;
+﻿using RolePlayHelper.BLL.Exceptions;
+using RolePlayHelper.BLL.Exceptions.Campaign;
+using RolePlayHelper.BLL.Exceptions.Character;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RolePlayHelper.BLL.Services
 {
     public class CampaignService
     {
         private readonly CampaignRepository _campaignRepository;
+        private readonly CharacterService _characterService;
 
-        public CampaignService(CampaignRepository campaignRepository)
+        public CampaignService(CharacterService characterService, CampaignRepository campaignRepository)
         {
             _campaignRepository = campaignRepository;
+            _characterService = characterService;
+        }
+
+        public void AddCharacterToCampaign(int userId, int campaginId, int characterId)
+        {
+
+            Character character = _characterService.GetOne(characterId)!;
+
+            //// Check si character appartient au User (should be done by frontend?)
+            //if (character.UserId != userId)
+            //{
+            //    // TO DO Custom Exception
+            //    throw new UnauthorizedAccessException();
+            //}
+
+            Campaign campaign = _campaignRepository.GetOne(campaginId) ?? throw new CampaignAlreadyExistsException(); // TO DO CUSTOM NOT FOUND HERE!!!
+
+            _campaignRepository.AddCharacterToCampaign(character, campaign);
+
         }
 
         public void Create(Campaign campaign, int gmId)

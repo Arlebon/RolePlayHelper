@@ -8,5 +8,7 @@
 
         public List<string> ClassNames { get; set; } = new();
 
+        public string? CampaignName { get; set; }
+
     }
 }
