@@ -1,9 +1,4 @@
 ﻿using RolePlayHelper.DL.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RolePlayHelper.DL.Entities
 {
@@ -18,6 +13,8 @@ namespace RolePlayHelper.DL.Entities
         public string Password { get; set; } = null!;
 
         public Role Role { get; set; }
+
+        public List<Character> Characters { get; set; } = new();
 
         public List<Campaign> CampaignsAsGM { get; set; } = new List<Campaign>();
     }

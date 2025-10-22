@@ -17,18 +17,28 @@ namespace RolePlayHelper.BLL.Services
             _charClassRepository = charClassRepository;
         }
 
-        public List<Character> getAll()
+        public List<Character> GetAll()
         {
             return _characterRepository.GetAll().ToList();
         }
 
-        public void Add(Character character)
+        public List<Character> GetAllByUserId(int userId)
+        {
+            if (!_characterRepository.ExistByUserId(userId))
+            {
+                throw new CharacterNotFoundException($"No Character for User with ID {userId} found.");
+            }
+            return _characterRepository.GetAllByUserId(userId).ToList();
+        }
+
+        public void Add(int userId, Character character)
         {
             if(_characterRepository.ExistByName(character.Name))
             {
                 throw new CharacterAlreadyExistException($"Character with name {character.Name} already exists.");
             }
 
+            character.UserId = userId;
             character.Race = _raceService.GetOneById(character.RaceId);
 
             // TO VERIFY
@@ -42,22 +52,25 @@ namespace RolePlayHelper.BLL.Services
                 character.Classes.Add(charClass);
             });
 
-            character.SubClassIds.ForEach(sid =>
-            {
-                CharClass? charClass = _charClassRepository.GetOne(sid);
-                if (charClass == null)
-                {
-                    throw new NotImplementedException();
-                }
-                character.Classes.Add(charClass);
-            });
-
             if(character.Race.StatModifier != null)
             {
                 CharacterTool.ApplyStatModifier(character, character.Race.StatModifier);
             }
 
             _characterRepository.Add(character);
+        }
+
+        public void UpdateVisibilty(int id, bool isPublic)
+        {
+            Character? character = _characterRepository.GetOne(id);
+            if (character == null)
+            {
+                throw new CharacterNotFoundException(id);
+            }
+
+            character.IsPublic = isPublic;
+
+            _characterRepository.Update(character);
         }
     }
 }

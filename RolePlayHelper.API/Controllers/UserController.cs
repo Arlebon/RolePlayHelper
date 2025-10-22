@@ -5,6 +5,7 @@ using RolePlayHelper.DL.Entities;
 using RolePlayHelper.API.Services;
 using Microsoft.AspNetCore.Authorization;
 using RolePlayHelper.API.Models.User;
+using RolePlayHelper.API.Models.Character;
 
 namespace RolePlayHelper.API.Controllers
 {
@@ -14,10 +15,12 @@ namespace RolePlayHelper.API.Controllers
     {
         private readonly UserService _userService;
         private readonly AuthService _authService;
-        public UserController(UserService userService, AuthService authService)
+        private readonly CharacterService _characterService;
+        public UserController(CharacterService characterService,UserService userService, AuthService authService)
         {
             _userService = userService;
             _authService = authService;
+            _characterService = characterService;
         }
 
         [HttpPost("register")]
@@ -46,6 +49,13 @@ namespace RolePlayHelper.API.Controllers
             string token = _authService.GenerateToken(user);
 
             return Ok(new {token});
+        }
+
+        [HttpGet("{userId}/List-Characters")]
+        public ActionResult<List<CharacterListDto>> ListCharactersByUser([FromRoute] int userId)
+        {
+            List<CharacterListDto> characters = _characterService.GetAllByUserId(userId).Select(c => c.ToCharacterListDto()).ToList();
+            return Ok(characters);
         }
 
     }

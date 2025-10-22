@@ -19,6 +19,9 @@ namespace RolePlayHelper.DAL.Database.Configs
             builder.HasIndex(c => c.Name)
                 .IsUnique();
 
+            builder.Property(c => c.IsPublic)
+                .HasDefaultValue(true);
+
             builder.HasOne(c => c.Race)
                 .WithMany(r => r.Characters)
                 .HasForeignKey(c => c.RaceId);

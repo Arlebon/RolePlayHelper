@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RolePlayHelper.DL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RolePlayHelper.DAL.Database.Configs
 {
@@ -39,6 +34,11 @@ namespace RolePlayHelper.DAL.Database.Configs
             builder.Property(u => u.Role)
                 .IsRequired()
                 .HasConversion<string>();
+
+            builder.HasMany(u => u.Characters)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
