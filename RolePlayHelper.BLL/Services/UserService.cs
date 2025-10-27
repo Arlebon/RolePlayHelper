@@ -2,6 +2,7 @@
 using RolePlayHelper.BLL.Exceptions.User;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
+using RolePlayHelper.DL.Enums;
 namespace RolePlayHelper.BLL.Services
 {
     public class UserService
@@ -50,6 +51,46 @@ namespace RolePlayHelper.BLL.Services
             }
 
             return user;
+        }
+
+        public void GetOrCreateAdmin()
+        {
+            bool adminExists = _userRepository.ExistByUsername("admin");
+
+            if (!adminExists)
+            {
+                var admin = new User
+                {
+                    UserName = "admin",
+                    Email = "admin@rph.local",
+                    Password = "123",
+                    Role = Role.Admin
+                };
+
+                admin.Password = Argon2.Hash(admin.Password);
+
+                _userRepository.Add(admin);
+            }
+        }
+
+        public void GetOrCreateDefaultUser()
+        {
+            bool defaultExists = _userRepository.ExistByUsername("default");
+
+            if (!defaultExists)
+            {
+                var defaultUser = new User
+                {
+                    UserName = "default",
+                    Email = "default@web.de",
+                    Password = "123",
+                    Role = Role.User
+                };
+
+                defaultUser.Password = Argon2.Hash(defaultUser.Password);
+
+                _userRepository.Add(defaultUser);
+            }
         }
     }
 }

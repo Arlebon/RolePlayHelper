@@ -1,6 +1,7 @@
 ﻿using RolePlayHelper.BLL.Exceptions.Character;
 using RolePlayHelper.BLL.Tools;
 using RolePlayHelper.DAL.Repositories;
+using RolePlayHelper.DAL.Seeders;
 using RolePlayHelper.DL.Entities;
 
 namespace RolePlayHelper.BLL.Services
@@ -10,11 +11,20 @@ namespace RolePlayHelper.BLL.Services
         private readonly CharacterRepository _characterRepository;
         private readonly RaceService _raceService;
         private readonly CharClassRepository _charClassRepository;
-        public CharacterService(CharClassRepository charClassRepository, CharacterRepository characterRepository, RaceService raceService)  
+        private readonly LanguageService _languageService;
+        private readonly UserService _userService;
+        private readonly RaceTraitService raceTraitService;
+
+        public CharacterService(
+            CharClassRepository charClassRepository, 
+            CharacterRepository characterRepository, 
+            RaceService raceService,
+)  
         {
             _characterRepository = characterRepository;
             _raceService = raceService;
             _charClassRepository = charClassRepository;
+            _
         }
 
         public List<Character> GetAll()
@@ -73,12 +83,12 @@ namespace RolePlayHelper.BLL.Services
             _characterRepository.Update(character);
         }
 
-        internal bool ExistByUserId(int userId)
+        public bool ExistByUserId(int userId)
         {
             return _characterRepository.ExistByUserId(userId);
         }
 
-        internal Character? GetOne(int characterId)
+        public Character? GetOne(int characterId)
         {
             Character? character = _characterRepository.GetOne(characterId);
             if (character == null)
@@ -87,5 +97,77 @@ namespace RolePlayHelper.BLL.Services
             }
             return character;
         }
+
+        public void GetOrCreateDefault()
+        {
+            User? defaultUser = context.Users.FirstOrDefault(u => u.UserName == "default");
+            if (defaultUser == null)
+            {
+                return;
+            }
+
+            Language defaultLanguage = SeederHelper.GetOrGenerateDefault(
+                context.Languages,
+                l => l.Name == "default",
+                () => new Language { Name = "default" },
+                context);
+
+            RaceTrait defaultRaceTrait = SeederHelper.GetOrGenerateDefault(
+                context.RaceTraits,
+                rt => rt.Name == "default",
+                () => new RaceTrait
+                {
+                    Name = "default",
+                    Description = "default Racetrait for default Race.",
+                },
+                context);
+
+            Race defaultRace = SeederHelper.GetOrGenerateDefault(
+                context.Races,
+                r => r.Name == "default",
+                () => new Race()
+                {
+                    Name = "default",
+                    Description = "this is a default Race for a default Character used by a default User.",
+                    StatModifier = new()
+                    {
+                        STR = 5,
+                        INT = -2,
+                    },
+                    Languages = new List<Language> { defaultLanguage },
+                    Traits = new List<RaceTrait> { defaultRaceTrait },
+                },
+                context);
+
+            CharClass defaultClass = SeederHelper.GetOrGenerateDefault(
+                context.Classes,
+                cl => cl.Name == "default",
+                () => new CharClass()
+                {
+                    ParentClassId = null,
+                    Name = "default",
+                    Description = "default Class for default Character",
+                },
+                context);
+
+            Character defaultCharacter = SeederHelper.GetOrGenerateDefault(
+                context.Characters,
+                c => c.Name == "default Character",
+                () => new Character()
+                {
+                    Name = "default Character",
+                    STR = 10,
+                    CHA = 10,
+                    DEX = 10,
+                    WIS = 10,
+                    CON = 10,
+                    INT = 10,
+                    Race = defaultRace,
+                    User = defaultUser,
+                    Classes = new List<CharClass> { defaultClass },
+                },
+                context);
+        }
+
     }
 }

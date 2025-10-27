@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RolePlayHelper.BLL.Services;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.DL.Entities;
 
@@ -11,7 +12,12 @@ namespace RolePlayHelper.DAL.Seeders
         {
             using var scope = serviceProvider.CreateScope();
 
-            var context = scope.ServiceProvider.GetRequiredService<RolePlayHelperContext>();
+            var characterService = scope.ServiceProvider.GetRequiredService<CharacterService>();
+            //var languageService = scope.ServiceProvider.GetRequiredService<LanguageService>();
+            //var raceTraitService = scope.ServiceProvider.GetRequiredService<RaceTraitService>();
+            //var charClassService = scope.ServiceProvider.GetRequiredService<CharClassService>();
+
+            characterService.GetOrCreateDefault();
 
             User? defaultUser = context.Users.FirstOrDefault(u => u.UserName == "default");
             if (defaultUser == null)

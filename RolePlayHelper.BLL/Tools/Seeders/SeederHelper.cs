@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RolePlayHelper.BLL.Tools;
+using RolePlayHelper.DL.Entities;
 using System.Linq.Expressions;
 
 namespace RolePlayHelper.DAL.Seeders
@@ -21,6 +23,10 @@ namespace RolePlayHelper.DAL.Seeders
             if (entity == null)
             {
                 entity = factory();
+                if (entity is Character character)
+                {
+                    CharacterTool.ApplyStatModifier(character, character.Race.StatModifier);
+                }
                 context.Add(entity);
                 context.SaveChanges();
             }
