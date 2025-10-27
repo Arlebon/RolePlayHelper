@@ -98,5 +98,12 @@ namespace RolePlayHelper.BLL.Services
 
             _campaignRepository.Update(current);
         }
+
+        public bool IsGM(int campaignId, int userId)
+        {
+            Campaign campaign = GetOne(campaignId);
+
+            return campaign.GMId == userId;
+        }
     }
 }

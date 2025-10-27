@@ -52,6 +52,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPut("{campaignId}/ChangeGM/{userId}")]
+        [Authorize(Policy = "IsGM")]
         public ActionResult ChangeGM([FromRoute] int campaignId, [FromRoute] int userId)
         {
             _campaignService.ChangeGM(campaignId, userId);
