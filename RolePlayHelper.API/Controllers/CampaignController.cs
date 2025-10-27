@@ -49,6 +49,14 @@ namespace RolePlayHelper.API.Controllers
 
             return Ok(characters);
         }
+
+        [HttpPut("{campaignId}/ChangeGM/{userId}")]
+        public ActionResult ChangeGM([FromRoute] int campaignId, [FromRoute] int userId)
+        {
+            _campaignService.ChangeGM(campaignId, userId);
+
+            return Ok();
+        }
     }
 
 }

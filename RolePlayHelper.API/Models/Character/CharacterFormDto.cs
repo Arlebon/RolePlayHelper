@@ -14,10 +14,6 @@ namespace RolePlayHelper.API.Models.Character
         public int RaceId { get; set; }
 
         [Required]
-        public int UserId { get; set; }
-
-
-        [Required]
         public List<int> CharClassIds { get; set; } = new();
 
         [Required]

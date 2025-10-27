@@ -39,5 +39,17 @@ namespace RolePlayHelper.BLL.Services
 
             return user;
         }
+
+        public User GetOne(int id)
+        {
+            User? user = _userRepository.GetOne(id);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException($"User with ID {id} not found");
+            }
+
+            return user;
+        }
     }
 }

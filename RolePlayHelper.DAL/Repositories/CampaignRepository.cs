@@ -27,8 +27,19 @@ namespace RolePlayHelper.DAL.Repositories
         public List<Character> GetCharactersByCampaign(int id)
         {
             return _set.Include(c => c.Characters)
+                .ThenInclude(ch => ch.Race)
+                .Include(c => c.Characters)
+                .ThenInclude(ch => ch.Classes)
                 .Where(c => c.Id == id)
                 .SelectMany(c => c.Characters)
+                .ToList();
+        }
+
+        public List<int> GetUserIdByCampaign(int id)
+        {
+            return _set.Where(c => c.Id == id)
+                .SelectMany(c => c.Characters)
+                .Select(ch => ch.UserId)
                 .ToList();
         }
     }

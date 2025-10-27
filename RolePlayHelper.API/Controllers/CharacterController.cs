@@ -27,11 +27,11 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpPost("Add-Character")]
-        //[Authorize]
+        [Authorize]
         public ActionResult Add([FromBody] CharacterFormDto form)
         {
-
-            _characterService.Add(form.UserId, form.ToCharacter());
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.Sid)!);
+            _characterService.Add(userId, form.ToCharacter());
             return Created();
         }
 
