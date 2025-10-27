@@ -8,7 +8,7 @@ namespace RolePlayHelper.DAL.Seeders
     public static class SeederHelper
     {
         public static T GetOrGenerateDefault<T>(
-            DbSet<T> set,
+            Func<T?> getter,
             
             // Expression <> permet de traduire en requête SQL au lieu de travailler en mémoire.
             // Le predicate sera mon filtre pour chercher la valeur defaut dans la db.

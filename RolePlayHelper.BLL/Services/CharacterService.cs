@@ -8,24 +8,31 @@ namespace RolePlayHelper.BLL.Services
 {
     public class CharacterService 
     {
+        #region Injections
         private readonly CharacterRepository _characterRepository;
         private readonly RaceService _raceService;
         private readonly CharClassRepository _charClassRepository;
         private readonly LanguageService _languageService;
         private readonly UserService _userService;
-        private readonly RaceTraitService raceTraitService;
+        private readonly RaceTraitService _raceTraitService;
 
         public CharacterService(
             CharClassRepository charClassRepository, 
             CharacterRepository characterRepository, 
             RaceService raceService,
-)  
+            LanguageService languageService,
+            UserService userService,
+            RaceTraitService raceTraitService
+        )
         {
             _characterRepository = characterRepository;
             _raceService = raceService;
             _charClassRepository = charClassRepository;
-            _
+            _languageService = languageService;
+            _userService = userService;
+            _raceTraitService = raceTraitService;
         }
+        #endregion
 
         public List<Character> GetAll()
         {
@@ -107,7 +114,7 @@ namespace RolePlayHelper.BLL.Services
             }
 
             Language defaultLanguage = SeederHelper.GetOrGenerateDefault(
-                context.Languages,
+                () => _languageService.GetOneByName("default"),
                 l => l.Name == "default",
                 () => new Language { Name = "default" },
                 context);
