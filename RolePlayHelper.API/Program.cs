@@ -1,15 +1,15 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RolePlayHelper.API.Middlewares;
 using RolePlayHelper.API.Services;
 using RolePlayHelper.BLL.Services;
-using RolePlayHelper.DAL.Repositories;
-using System.Text;
-
-using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
-using RolePlayHelper.API.Middlewares;
+using RolePlayHelper.DAL.Repositories;
+using RolePlayHelper.DAL.Seeders;
+using RolePlayHelper.Seeders;
+using System.Text;
 
 namespace RolePlayHelper.API
 {
@@ -110,6 +110,12 @@ namespace RolePlayHelper.API
             builder.Services.AddDbContext<RolePlayHelperContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             var app = builder.Build();
+
+            #region Seeders
+            UserSeeder.SeedAdminUser(app.Services);
+            UserSeeder.SeedUser(app.Services);
+            CharacterSeeder.SeedDefaultCharacter(app.Services);
+            #endregion
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
