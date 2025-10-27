@@ -10,6 +10,8 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.API.Middlewares;
+using RolePlayHelper.API.CustomAuthorize.IsGM;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RolePlayHelper.API
 {
@@ -81,6 +83,9 @@ namespace RolePlayHelper.API
             builder.Services.AddScoped<CampaignService>();
             #endregion
 
+            builder.Services.AddScoped<IAuthorizationHandler, IsGMHandler>();
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 
             builder.Services.AddAuthentication(option =>
             {
@@ -105,7 +110,10 @@ namespace RolePlayHelper.API
                 };
             });
 
-
+            builder.Services.AddAuthorization(option =>
+            {
+                option.AddPolicy("IsGM", policy => policy.AddRequirements(new IsGMRequirement()));
+            });
 
             builder.Services.AddDbContext<RolePlayHelperContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
