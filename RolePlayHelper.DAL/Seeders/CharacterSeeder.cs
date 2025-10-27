@@ -19,33 +19,26 @@ namespace RolePlayHelper.DAL.Seeders
                 return;
             }
 
-            Language? defaultLanguage = context.Languages.FirstOrDefault(l => l.Name == "default");
-            if (defaultLanguage == null)
-            {
-                defaultLanguage = new Language
-                {
-                    Name = "default"
-                };
-                context.Languages.Add(defaultLanguage);
-                context.SaveChanges();
-            }
+            Language defaultLanguage = SeederHelper.GetOrGenerateDefault(
+                context.Languages,
+                l => l.Name == "default",
+                () => new Language { Name = "default" },
+                context);
 
-            RaceTrait? defaultRaceTrait = context.RaceTraits.FirstOrDefault(rt => rt.Name == "default");
-            if (defaultRaceTrait == null)
-            {
-                defaultRaceTrait = new RaceTrait()
+            RaceTrait defaultRaceTrait = SeederHelper.GetOrGenerateDefault(
+                context.RaceTraits,
+                rt => rt.Name == "default",
+                () => new RaceTrait
                 {
                     Name = "default",
                     Description = "default Racetrait for default Race.",
-                };
-                context.Add(defaultRaceTrait);
-                context.SaveChanges();
-            }
+                },
+                context);
 
-            Race? defaultRace = context.Races.FirstOrDefault(r => r.Name == "default");
-            if (defaultRace == null)
-            {
-                defaultRace = new Race
+            Race defaultRace = SeederHelper.GetOrGenerateDefault(
+                context.Races,
+                r => r.Name == "default",
+                () => new Race()
                 {
                     Name = "default",
                     Description = "this is a default Race for a default Character used by a default User.",
@@ -56,28 +49,24 @@ namespace RolePlayHelper.DAL.Seeders
                     },
                     Languages = new List<Language> { defaultLanguage },
                     Traits = new List<RaceTrait> { defaultRaceTrait },
-                };
-                context.Races.Add(defaultRace);
-                context.SaveChanges();
-            }
+                },
+                context);
 
-            CharClass? defaultClass = context.Classes.FirstOrDefault(cl => cl.Name == "default");
-            if (defaultClass == null)
-            {
-                defaultClass = new()
+            CharClass defaultClass = SeederHelper.GetOrGenerateDefault(
+                context.Classes,
+                cl => cl.Name == "default",
+                () => new CharClass()
                 {
                     ParentClassId = null,
                     Name = "default",
                     Description = "default Class for default Character",
-                };
-                context.Classes.Add(defaultClass);
-                context.SaveChanges();
-            }
+                },
+                context);
 
-            Character? defaultCharacter = context.Characters.FirstOrDefault(c => c.Name == "default");
-            if (defaultCharacter == null)
-            {
-                defaultCharacter = new Character()
+            Character defaultCharacter = SeederHelper.GetOrGenerateDefault(
+                context.Characters,
+                c => c.Name == "default Character",
+                () => new Character()
                 {
                     Name = "default Character",
                     STR = 10,
@@ -89,13 +78,8 @@ namespace RolePlayHelper.DAL.Seeders
                     Race = defaultRace,
                     User = defaultUser,
                     Classes = new List<CharClass> { defaultClass },
-                    CampaignId = null,
-                    IsPublic = true,
-                    CurrentCampaign = null,
-                };
-            }
-            context.Add(defaultCharacter);
-            context.SaveChanges();
+                },
+                context);
         }
     }
 }
