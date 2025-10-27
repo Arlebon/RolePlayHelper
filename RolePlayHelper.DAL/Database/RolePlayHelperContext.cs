@@ -22,6 +22,8 @@ namespace RolePlayHelper.DAL.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RolePlayHelperContext).Assembly);
+
+
         }
     }
 }

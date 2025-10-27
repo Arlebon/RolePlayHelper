@@ -128,6 +128,14 @@ namespace RolePlayHelper.DAL.Migrations
                     b.HasIndex("ParentClassId");
 
                     b.ToTable("Character_Class", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "a basic fighter.",
+                            Name = "Fighter"
+                        });
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
@@ -235,6 +243,13 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Language", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Common"
+                        });
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Race", b =>
@@ -270,6 +285,15 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Race", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Its a human, stupid!",
+                            Name = "Human",
+                            StatModifierId = 1
+                        });
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.RaceTrait", b =>
@@ -295,6 +319,14 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("RaceTrait", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Can see in the dark up to 60 ft",
+                            Name = "Darkvision"
+                        });
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.StatModifier", b =>
@@ -350,6 +382,14 @@ namespace RolePlayHelper.DAL.Migrations
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
 
                     b.ToTable("StatModifier", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DEX = 1,
+                            STR = 2
+                        });
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.User", b =>
@@ -390,6 +430,24 @@ namespace RolePlayHelper.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("User_", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@admin.be",
+                            Password = "$argon2id$v=19$m=65536,t=3,p=1$eQbwjY4U6Qp4nQ8tR9qUMw$7F5XAuc0ayYUhJuFufNY8sGJcPob8deYPtwW7pPcQjI",
+                            Role = "Admin",
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "default@default.be",
+                            Password = "$argon2id$v=19$m=65536,t=3,p=1$0rFQapo6ZyA7BugSSCUscg$LLA374rbSkjGbBYILPw8XsjUVYozb1mwCNBEF91x0v0",
+                            Role = "User",
+                            UserName = "default"
+                        });
                 });
 
             modelBuilder.Entity("CharClassCharacter", b =>

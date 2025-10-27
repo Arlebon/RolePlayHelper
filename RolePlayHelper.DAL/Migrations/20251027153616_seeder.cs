@@ -2,10 +2,12 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace RolePlayHelper.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init27_10 : Migration
+    public partial class seeder : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -265,6 +267,40 @@ namespace RolePlayHelper.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Character_Class",
+                columns: new[] { "Id", "Description", "Name", "ParentClassId" },
+                values: new object[] { 1, "a basic fighter.", "Fighter", null });
+
+            migrationBuilder.InsertData(
+                table: "Language",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Common" });
+
+            migrationBuilder.InsertData(
+                table: "RaceTrait",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[] { 1, "Can see in the dark up to 60 ft", "Darkvision" });
+
+            migrationBuilder.InsertData(
+                table: "StatModifier",
+                columns: new[] { "Id", "ArmorClass", "CHA", "CON", "DEX", "HitModifier", "INT", "Initiative", "MVT", "MaxHP", "STR", "SpellAttack", "SpellSave", "WIS" },
+                values: new object[] { 1, null, null, null, 1, null, null, null, null, null, 2, null, null, null });
+
+            migrationBuilder.InsertData(
+                table: "User_",
+                columns: new[] { "Id", "Email", "Password", "Role", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "admin@admin.be", "$argon2id$v=19$m=65536,t=3,p=1$eQbwjY4U6Qp4nQ8tR9qUMw$7F5XAuc0ayYUhJuFufNY8sGJcPob8deYPtwW7pPcQjI", "Admin", "admin" },
+                    { 2, "default@default.be", "$argon2id$v=19$m=65536,t=3,p=1$0rFQapo6ZyA7BugSSCUscg$LLA374rbSkjGbBYILPw8XsjUVYozb1mwCNBEF91x0v0", "User", "default" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Race",
+                columns: new[] { "Id", "Description", "Name", "StatModifierId" },
+                values: new object[] { 1, "Its a human, stupid!", "Human", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Campaign_GMId",

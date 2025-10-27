@@ -7,14 +7,13 @@ using RolePlayHelper.API.Services;
 using RolePlayHelper.BLL.Services;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.DAL.Repositories;
-using RolePlayHelper.DAL.Seeders;
-using RolePlayHelper.Seeders;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.API.Middlewares;
 using RolePlayHelper.API.CustomAuthorize.IsGM;
 using Microsoft.AspNetCore.Authorization;
+using RolePlayHelper.BLL;
 
 namespace RolePlayHelper.API
 {
@@ -122,11 +121,7 @@ namespace RolePlayHelper.API
 
             var app = builder.Build();
 
-            #region Seeders
-            UserSeeder.SeedAdminUser(app.Services);
-            UserSeeder.SeedUser(app.Services);
-            CharacterSeeder.SeedDefaultCharacter(app.Services);
-            #endregion
+            AppSeeder.SeedDefaultCharacter(app.Services);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
