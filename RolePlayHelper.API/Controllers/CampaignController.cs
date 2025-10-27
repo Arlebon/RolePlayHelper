@@ -43,6 +43,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet("{id}/Characters")]
+        [Authorize]
         public ActionResult GetCharactersByCampaign([FromRoute] int id)
         {
             List<CharacterByCampaignListDto> characters = _campaignService.GetCharactersByCampaign(id).Select(c => c.ToCharacterByCampaignListDto()).ToList();

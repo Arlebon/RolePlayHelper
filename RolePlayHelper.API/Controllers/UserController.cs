@@ -3,9 +3,7 @@ using RolePlayHelper.BLL.Services;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.DL.Entities;
 using RolePlayHelper.API.Services;
-using Microsoft.AspNetCore.Authorization;
 using RolePlayHelper.API.Models.User;
-using RolePlayHelper.API.Models.Character;
 
 namespace RolePlayHelper.API.Controllers
 {

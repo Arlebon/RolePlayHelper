@@ -461,7 +461,7 @@ namespace RolePlayHelper.DAL.Migrations
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Character", b =>
                 {
                     b.HasOne("RolePlayHelper.DL.Entities.Campaign", "CurrentCampaign")
-                        .WithMany("Charcacters")
+                        .WithMany("Characters")
                         .HasForeignKey("CampaignId");
 
                     b.HasOne("RolePlayHelper.DL.Entities.Race", "Race")
@@ -496,7 +496,7 @@ namespace RolePlayHelper.DAL.Migrations
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.Campaign", b =>
                 {
-                    b.Navigation("Charcacters");
+                    b.Navigation("Characters");
                 });
 
             modelBuilder.Entity("RolePlayHelper.DL.Entities.CharClass", b =>
