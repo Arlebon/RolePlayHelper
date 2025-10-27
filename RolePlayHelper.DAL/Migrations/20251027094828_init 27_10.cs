@@ -5,7 +5,7 @@
 namespace RolePlayHelper.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class seeder : Migration
+    public partial class init27_10 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

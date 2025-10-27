@@ -12,13 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-<<<<<<<< HEAD:RolePlayHelper.DAL/Migrations/20251022130410_Init.Designer.cs
-    [Migration("20251022130410_Init")]
-    partial class Init
-========
-    [Migration("20251027093804_seeder")]
-    partial class seeder
->>>>>>>> RaphSeeder:RolePlayHelper.DAL/Migrations/20251027093804_seeder.Designer.cs
+    [Migration("20251027094828_init 27_10")]
+    partial class init27_10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
