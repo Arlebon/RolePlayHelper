@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RolePlayHelper.DAL.Database.Seeders;
 using RolePlayHelper.DL.Entities;
 
 namespace RolePlayHelper.DAL.Database
@@ -23,7 +24,10 @@ namespace RolePlayHelper.DAL.Database
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RolePlayHelperContext).Assembly);
 
-
+            modelBuilder.ApplyConfiguration(new StatModifierSeeder());
+            modelBuilder.ApplyConfiguration(new ClassSeeder());
+            modelBuilder.ApplyConfiguration(new RaceSeeder());
+            // TODO Continue
         }
     }
 }

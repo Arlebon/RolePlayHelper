@@ -15,6 +15,8 @@ namespace RolePlayHelper.DAL.Database.Seeders
                 Description = "Its a human, stupid!",
                 StatModifierId = 1,
             });
+
+
         }
     }
 }
