@@ -24,10 +24,10 @@ namespace RolePlayHelper.DAL.Database
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RolePlayHelperContext).Assembly);
 
-            modelBuilder.ApplyConfiguration(new StatModifierSeeder());
-            modelBuilder.ApplyConfiguration(new ClassSeeder());
-            modelBuilder.ApplyConfiguration(new RaceSeeder());
-            // TODO Continue
+            //modelBuilder.ApplyConfiguration(new StatModifierSeeder());
+            //modelBuilder.ApplyConfiguration(new ClassSeeder());
+            //modelBuilder.ApplyConfiguration(new RaceSeeder());
+            //// TODO Continue
         }
     }
 }

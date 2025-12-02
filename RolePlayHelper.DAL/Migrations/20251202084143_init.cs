@@ -7,7 +7,7 @@
 namespace RolePlayHelper.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class seeder : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -293,8 +293,8 @@ namespace RolePlayHelper.DAL.Migrations
                 columns: new[] { "Id", "Email", "Password", "Role", "UserName" },
                 values: new object[,]
                 {
-                    { 1, "admin@admin.be", "$argon2id$v=19$m=65536,t=3,p=1$eQbwjY4U6Qp4nQ8tR9qUMw$7F5XAuc0ayYUhJuFufNY8sGJcPob8deYPtwW7pPcQjI", "Admin", "admin" },
-                    { 2, "default@default.be", "$argon2id$v=19$m=65536,t=3,p=1$0rFQapo6ZyA7BugSSCUscg$LLA374rbSkjGbBYILPw8XsjUVYozb1mwCNBEF91x0v0", "User", "default" }
+                    { 1, "admin@admin.be", "$argon2id$v=19$m=65536,t=3,p=1$H7ukKpTOCKP9fpAW165ICQ$p6g3ofqO8+D6BaCWQUukeYJXiQpBzkcYETrYOOkaho4", "Admin", "admin" },
+                    { 2, "default@default.be", "$argon2id$v=19$m=65536,t=3,p=1$ZgQIsJS8T9zv5d8Wmy+BwQ$O0dSZahxdUbyhLnYZLPoX2nOyJh8maAoXHoQ39JzSWk", "User", "default" }
                 });
 
             migrationBuilder.InsertData(

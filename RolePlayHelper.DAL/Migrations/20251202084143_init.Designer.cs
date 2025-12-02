@@ -12,8 +12,8 @@ using RolePlayHelper.DAL.Database;
 namespace RolePlayHelper.DAL.Migrations
 {
     [DbContext(typeof(RolePlayHelperContext))]
-    [Migration("20251027153616_seeder")]
-    partial class seeder
+    [Migration("20251202084143_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -439,7 +439,7 @@ namespace RolePlayHelper.DAL.Migrations
                         {
                             Id = 1,
                             Email = "admin@admin.be",
-                            Password = "$argon2id$v=19$m=65536,t=3,p=1$eQbwjY4U6Qp4nQ8tR9qUMw$7F5XAuc0ayYUhJuFufNY8sGJcPob8deYPtwW7pPcQjI",
+                            Password = "$argon2id$v=19$m=65536,t=3,p=1$H7ukKpTOCKP9fpAW165ICQ$p6g3ofqO8+D6BaCWQUukeYJXiQpBzkcYETrYOOkaho4",
                             Role = "Admin",
                             UserName = "admin"
                         },
@@ -447,7 +447,7 @@ namespace RolePlayHelper.DAL.Migrations
                         {
                             Id = 2,
                             Email = "default@default.be",
-                            Password = "$argon2id$v=19$m=65536,t=3,p=1$0rFQapo6ZyA7BugSSCUscg$LLA374rbSkjGbBYILPw8XsjUVYozb1mwCNBEF91x0v0",
+                            Password = "$argon2id$v=19$m=65536,t=3,p=1$ZgQIsJS8T9zv5d8Wmy+BwQ$O0dSZahxdUbyhLnYZLPoX2nOyJh8maAoXHoQ39JzSWk",
                             Role = "User",
                             UserName = "default"
                         });
