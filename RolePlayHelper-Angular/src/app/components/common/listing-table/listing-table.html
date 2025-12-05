@@ -1,0 +1,18 @@
+<table>
+    <thead>
+        <tr>
+            @for(col of columns(); track $index) {
+                <th>{{ col | uppercase }}</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for(e of elements(); track e.id) {
+            <tr (click)="onClickDetails(e.id)">
+                @for(col of columns(); track $index) {
+                    <td>{{ e[col] }}</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
