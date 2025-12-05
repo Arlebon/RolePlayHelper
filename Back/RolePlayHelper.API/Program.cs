@@ -82,6 +82,16 @@ namespace RolePlayHelper.API
             builder.Services.AddScoped<CampaignService>();
             #endregion
 
+            builder.Services.AddCors(service =>
+            {
+                service.AddPolicy("FFA", policy =>
+                {
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyMethod();
+                    policy.AllowAnyHeader();
+                });
+            });
+
             builder.Services.AddScoped<IAuthorizationHandler, IsGMHandler>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -128,6 +138,8 @@ namespace RolePlayHelper.API
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("FFA");
 
             app.UseMiddleware<ExceptionMiddleware>();
 
