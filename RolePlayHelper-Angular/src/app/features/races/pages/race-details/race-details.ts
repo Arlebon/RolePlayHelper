@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DetailsPage } from '@components/common/details-page/details-page';
 
 @Component({
   selector: 'app-race-details',

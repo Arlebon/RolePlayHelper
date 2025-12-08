@@ -12,5 +12,14 @@ namespace RolePlayHelper.API.Mappers
                 Name = form.Name,
             };
         }
+
+        public static LanguageListDTO ToLanguageListDTO(this Language language)
+        {
+            return new LanguageListDTO()
+            {
+                Id = language.Id,
+                Name = language.Name
+            };
+        }
     }
 }

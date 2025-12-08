@@ -1,11 +1,13 @@
 import { UpperCasePipe } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listing-table',
-  imports: [UpperCasePipe],
+  imports: [UpperCasePipe, RouterLink],
   templateUrl: './listing-table.html',
   styleUrl: './listing-table.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListingTable {
   elements = input.required<

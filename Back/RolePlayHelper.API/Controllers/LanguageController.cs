@@ -19,9 +19,9 @@ namespace RolePlayHelper.API.Controllers
 
 
         [HttpGet]
-        public ActionResult<List<Language>> getAll()
+        public ActionResult<List<LanguageListDTO>> getAll()
         {
-            List<Language> languages = _languageService.GetAll();
+            List<LanguageListDTO> languages = _languageService.GetAll().Select(l => l.ToLanguageListDTO()).ToList();
             return Ok(languages);
         }
 

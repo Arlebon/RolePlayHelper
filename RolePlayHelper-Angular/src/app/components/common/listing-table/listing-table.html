@@ -1,4 +1,4 @@
-<table>
+<table class="table">
     <thead>
         <tr>
             @for(col of columns(); track $index) {
@@ -8,9 +8,9 @@
     </thead>
     <tbody>
         @for(e of elements(); track e.id) {
-            <tr (click)="onClickDetails(e.id)">
+            <tr>
                 @for(col of columns(); track $index) {
-                    <td>{{ e[col] }}</td>
+                    <td routerLink="./details/{{e.id}}">{{ e[col] }}</td>
                 }
             </tr>
         }

@@ -6,4 +6,8 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/authentication/authentication.routes').then((r) => r.routes),
   },
+  {
+    path: 'language',
+    loadChildren: () => import('./features/language/language.routes').then((r) => r.routes),
+  },
 ];
