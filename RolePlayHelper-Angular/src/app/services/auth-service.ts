@@ -14,16 +14,16 @@ import { firstValueFrom } from 'rxjs';
 export class AuthService {
   private readonly _httpClient = inject(HttpClient);
 
+  // signal pour le token JWT
+  private _token = signal<string | null>(null);
+  token = this._token.asReadonly();
+
   // signal pour savoir si l'utilisateur est connecté (calculé à partir du token)
   isConnected: Signal<boolean> = computed(() => !!this.token()); // !! convertit en booléen
 
   // signal pour le role de l'utilisateur (null si non connecté)
   private _role = signal<UserRole | null>(null);
   role = this._role.asReadonly();
-
-  // signal pour le token JWT
-  private _token = signal<string | null>(null);
-  token = this._token.asReadonly();
 
   constructor() {
     // Récupération du token depuis le localstorage
@@ -49,7 +49,12 @@ export class AuthService {
         // (utilisateur connecté)
         localStorage.setItem('token', token);
         const tokenProp = jwtDecode<Token>(token);
-        this._role.set(tokenProp.role);
+        this._role.set(
+          tokenProp[
+            'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+          ].toLowerCase() as UserRole,
+        );
+        console.log(tokenProp);
       }
     });
   }
@@ -62,6 +67,7 @@ export class AuthService {
         password,
       }),
     );
+    console.log(response.token);
 
     // Stockage du token dans le signal (ce qui déclenche l'effet)
     this._token.set(response.token);

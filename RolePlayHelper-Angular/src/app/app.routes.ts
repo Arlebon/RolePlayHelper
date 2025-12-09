@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from '@core/guards/admin-guard';
 
 export const routes: Routes = [
   {
@@ -17,5 +18,18 @@ export const routes: Routes = [
   {
     path: 'char-class',
     loadChildren: () => import('./features/charClass/char-class.routes').then((r) => r.routes),
+  },
+  {
+    path: 'race',
+    loadChildren: () => import('./features/races/races.routes').then((r) => r.routes),
+  },
+  {
+    path: 'admin',
+    canActivateChild: [adminGuard],
+    loadChildren: () => import('./features/admin/admin.routes').then((r) => r.routes),
+  },
+  {
+    path: 'error',
+    loadChildren: () => import('./features/error/error.routes').then((r) => r.routes),
   },
 ];

@@ -20,9 +20,9 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<RaceIndexDto>> GetAll()
+        public ActionResult<List<RaceListDto>> GetAll()
         {
-            List<RaceIndexDto> races = _raceService.GetAll().Select(r => r.ToRaceIndexDto()).ToList();
+            List<RaceListDto> races = _raceService.GetAll().Select(r => r.ToRaceListDto()).ToList();
             return Ok(races);
         }
 

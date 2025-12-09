@@ -6,11 +6,13 @@ namespace RolePlayHelper.API.Mappers
 {
     public static class RaceMapper
     {
-        public static RaceIndexDto ToRaceIndexDto(this Race race)
+        public static RaceListDto ToRaceListDto(this Race race)
         {
-            return new RaceIndexDto()
+            return new RaceListDto()
             {
+                Id = race.Id,
                 Name = race.Name,
+                statModifier = race.StatModifier.ToStatModifierListDto()
             };
         }
 

@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="../">Home</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Encyclopedia
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/language">Languages</a>
+          <!-- <div class="dropdown-divider"></div> -->
+          <a class="dropdown-item" routerLink="/race-trait">Racetraits</a>
+          <a class="dropdown-item" routerLink="/race">Races</a>
+          <a class="dropdown-item" routerLink="/char-class">Classes</a>
+        </div>
+      </li>
+      @if (!isConnected()) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/authentication/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/authentication/register">Register</a>
+        </li>
+      } @else {
+        <li class="nav-item">
+          <button class="btn btn-outline-success my-2 my-sm-0" (click)="onClickLogout()">
+            Logout
+          </button>
+        </li>
+      }
+      @if (role() === UserRole.Admin) {
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Create Assets
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="admin/language/create">Languages</a>
+            <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" routerLink="admin/race-trait/create">Racetraits</a>
+            <a class="dropdown-item" routerLink="admin/race/create">Races</a>
+            <a class="dropdown-item" routerLink="admin/char-class/create">Classes</a>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</nav>

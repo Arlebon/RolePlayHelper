@@ -24,5 +24,25 @@ namespace RolePlayHelper.API.Mappers
                 SpellSave = form.SpellSave,
             };
         }
+
+        public static StatmodifierListDto ToStatModifierListDto(this StatModifier sm)
+        {
+            return new ()
+            {
+                STR = sm.STR,
+                DEX = sm.DEX,
+                CHA = sm.CHA,
+                INT = sm.INT,
+                CON = sm.CON,
+                WIS = sm.WIS,
+                MVT = sm.MVT,
+                MaxHP = sm.MaxHP,
+                ArmorClass = sm.ArmorClass,
+                HitModifier = sm.HitModifier,
+                Initiative = sm.Initiative,
+                SpellAttack = sm.SpellAttack,
+                SpellSave = sm.SpellSave,
+            };
+        }
     }
 }

@@ -25,5 +25,10 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set.Include(r => r.StatModifier).Include(r => r.Languages).Include(r => r.Traits).FirstOrDefault(r => r.Id == id);
         }
+
+        public override IEnumerable<Race> GetAll()
+        {
+            return _set.Include(sm => sm.StatModifier).ToList();
+        }
     }
 }
