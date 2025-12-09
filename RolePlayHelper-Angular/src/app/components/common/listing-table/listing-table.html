@@ -1,18 +1,18 @@
 <table class="table">
-    <thead>
-        <tr>
-            @for(col of columns(); track $index) {
-                <th>{{ col | uppercase }}</th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @for(e of elements(); track e.id) {
-            <tr>
-                @for(col of columns(); track $index) {
-                    <td routerLink="./details/{{e.id}}">{{ e[col] }}</td>
-                }
-            </tr>
+  <thead>
+    <tr>
+      @for (col of columns(); track $index) {
+        <th>{{ col | uppercase }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (e of elements(); track e.id) {
+      <tr>
+        @for (col of columns(); track $index) {
+          <td routerLink="./details/{{ e.id }}">{{ e[col] }}</td>
         }
-    </tbody>
+      </tr>
+    }
+  </tbody>
 </table>

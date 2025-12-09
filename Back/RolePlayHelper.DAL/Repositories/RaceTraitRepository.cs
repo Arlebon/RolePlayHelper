@@ -1,4 +1,5 @@
 ﻿using EntityToolBox;
+using Microsoft.EntityFrameworkCore;
 using RolePlayHelper.DAL.Database;
 using RolePlayHelper.DL.Entities;
 
@@ -13,6 +14,11 @@ namespace RolePlayHelper.DAL.Repositories
         public RaceTrait? GetByName(string name)
         {
             return _set.FirstOrDefault(t => t.Name == name);
+        }
+
+        public override IEnumerable<RaceTrait> GetAll()
+        {
+            return _set.Include(rt => rt.Races).ToList();
         }
     }
 }

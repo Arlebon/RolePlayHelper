@@ -14,7 +14,7 @@ namespace RolePlayHelper.API.Mappers
                 Name = charClass.Name,
                 ParentClassId = charClass.ParentClassId,
 
-                
+
                 ParentClass = charClass.ParentClass != null
                     ? new CharClassListDto
                     {
@@ -24,7 +24,8 @@ namespace RolePlayHelper.API.Mappers
                     : null,
                 SubClasses = charClass.SubClasses?
                     .Select(scl => scl.ToSubClassListDto())
-                    .ToList() ?? new List<SubClassListDto>() // Si ma liste est null je crée un liste vide
+                    .ToList() ?? new List<SubClassListDto>(), // Si ma liste est null je crée un liste vide
+                SubClassNames = charClass.SubClasses?.Select(cc => cc.Name).ToList()?? new()
             };
         }
 

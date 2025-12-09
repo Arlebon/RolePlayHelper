@@ -17,7 +17,7 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Character>> GetAll()
+        public ActionResult<List<CharClassListDto>> GetAll()
         {
             List<CharClassListDto> characters = _charClassService
                 .getAll()

@@ -73,10 +73,12 @@ namespace RolePlayHelper.BLL.Services
                 if (trait != null)
                 {
                     verifiedTraits.Add(trait);
+                    trait.Races.Add(race);
                 }
                 else
                 {
                     verifiedTraits.Add(t);
+                    t.Races.Add(race);
                 }
 
             });
