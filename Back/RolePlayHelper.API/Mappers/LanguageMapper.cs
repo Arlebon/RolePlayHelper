@@ -18,7 +18,8 @@ namespace RolePlayHelper.API.Mappers
             return new LanguageListDTO()
             {
                 Id = language.Id,
-                Name = language.Name
+                Name = language.Name,
+                Races = language.Races.Select(r => r.Name).ToList(),
             };
         }
     }

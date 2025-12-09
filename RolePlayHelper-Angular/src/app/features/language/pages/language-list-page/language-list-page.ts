@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { LanguageList } from '@core/models/language/language-list.model';
 import { ListingTable } from '@components/common/listing-table/listing-table';
 import { LanguageService } from 'src/app/services/language-service';

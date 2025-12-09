@@ -1,10 +1,10 @@
-import { UpperCasePipe } from '@angular/common';
+import { NgClass, UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listing-table',
-  imports: [UpperCasePipe, RouterLink],
+  imports: [UpperCasePipe, RouterLink, NgClass],
   templateUrl: './listing-table.html',
   styleUrl: './listing-table.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +17,7 @@ export class ListingTable {
     }[]
   >();
   columns = input.required<string[]>();
+  clickable = input.required<boolean>();
 
   clickDetails = output<number>();
 
