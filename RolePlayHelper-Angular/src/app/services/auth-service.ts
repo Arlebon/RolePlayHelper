@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Token } from '@core/models';
+
 import { computed, effect, inject, Injectable, signal, Signal } from '@angular/core';
 import { UserRole } from '@core/enums';
-import { LoginResponse } from '@core/models/login-response.model';
-import { UserLogin } from '@core/models/user-login.model';
-import { UserRegisterForm } from '@core/models/user-register-form.model';
+import { LoginResponse, Token, UserRegisterForm } from '@core/models/authentication-models';
+
 import { environment } from '@env';
 import { jwtDecode } from 'jwt-decode';
 import { firstValueFrom } from 'rxjs';

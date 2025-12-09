@@ -10,4 +10,12 @@ export const routes: Routes = [
     path: 'language',
     loadChildren: () => import('./features/language/language.routes').then((r) => r.routes),
   },
+  {
+    path: 'race-trait',
+    loadChildren: () => import('./features/race-traits/raceTraits.routes').then((r) => r.routes),
+  },
+  {
+    path: 'char-class',
+    loadChildren: () => import('./features/charClass/char-class.routes').then((r) => r.routes),
+  },
 ];

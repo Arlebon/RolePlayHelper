@@ -13,5 +13,16 @@ namespace RolePlayHelper.API.Mappers
                 Description = form.Description,
             };
         }
+
+        public static RaceTraitListDto ToRaceTraitListDto(this RaceTrait rt)
+        {
+            return new RaceTraitListDto
+            {
+                Id = rt.Id,
+                Description = rt.Description,
+                Name = rt.Name,
+                Races = rt.Races.Select(r => r.Name).ToList()
+            };
+        }
     }
 }

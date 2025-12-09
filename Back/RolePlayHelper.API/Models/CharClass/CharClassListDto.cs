@@ -10,7 +10,7 @@
         public int? ParentClassId { get; set; }
         public CharClassListDto? ParentClass { get; set; }
 
-
+        public List<string> SubClassNames { get; set; } = new();
         public List<SubClassListDto>? SubClasses { get; set; } = new();
     }
 }

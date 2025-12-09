@@ -8,7 +8,8 @@ import {
 } from '@angular/forms';
 import { readonly } from '@angular/forms/signals';
 import { Router } from '@angular/router';
-import { ApiError } from '@core/models/api-error.model';
+import { ApiError } from '@core/models/authentication-models';
+
 import { AuthService } from 'src/app/services/auth-service';
 
 @Component({
