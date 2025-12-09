@@ -1,28 +1,32 @@
 <table class="table">
-    <thead>
-        <tr>
-            @for(col of columns(); track $index) {
-                <th>{{ col | uppercase }}</th>
+  <thead>
+    <tr>
+      @for (col of columns(); track $index) {
+        <th>{{ col | uppercase }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (e of elements(); track e.id) {
+      <tr
+        [routerLink]="clickable() ? ['./', e.id] : null"
+        [ngClass]="{ clickableList: clickable() }"
+      >
+        @for (col of columns(); track $index) {
+          @if (Array.isArray(e[col])) {
+            @if (e[col].length == 0) {
+              <!---->
+              <td>-</td>
+            } @else {
+              <td>
+                {{ e[col].join(', ') }}
+              </td>
             }
-        </tr>
-    </thead>
-    <tbody>
-        @for(e of elements(); track e.id) {
-            <tr [routerLink]="clickable() ? ['./', e.id] : null" [ngClass]="{'clickableList': clickable()}">
-                @for(col of columns(); track $index) {
-                    @if(typeof e[col] == typeof []) {
-                        @if(e[col].length == 0) {
-                            <td>-</td>
-                        } @else {
-                            <td>
-                                {{ e[col].join(', ') }}
-                            </td>
-                        }
-                    } @else {
-                        <td>{{ e[col] }}</td>
-                    }
-                }
-            </tr>
+          } @else {
+            <td>{{ e[col] }}</td>
+          }
         }
-    </tbody>
+      </tr>
+    }
+  </tbody>
 </table>

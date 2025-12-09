@@ -4,5 +4,5 @@ export interface CharClassListModel {
   description: string;
   parentClassId: number | null;
   parentClass: string | null;
-  subClasses: string[];
+  subClassNames: string[];
 }

@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListingTable {
+  protected readonly Array = Array;
   elements = input.required<
     {
       id: number;
@@ -18,7 +19,6 @@ export class ListingTable {
   >();
   columns = input.required<string[]>();
   clickable = input.required<boolean>();
-
   clickDetails = output<number>();
 
   onClickDetails(id: number) {
