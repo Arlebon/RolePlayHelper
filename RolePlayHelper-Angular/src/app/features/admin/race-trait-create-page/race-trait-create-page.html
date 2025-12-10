@@ -1,1 +1,17 @@
-<p>race-trait-create-page works!</p>
+<h2>Create Racetrait</h2>
+<form [formGroup]="raceTraitForm" (ngSubmit)="onSubmit()">
+  <div class="form w-25">
+    <label for="name">Racetrait </label>
+    <input class="form-control" type="text" id="name" formControlName="traitName" />
+  </div>
+  <div class="form w-25">
+    <label for="Description">Description </label>
+    <textarea
+      class="form-control"
+      type="text"
+      id="Description"
+      formControlName="description"
+    ></textarea>
+  </div>
+  <button [disabled]="raceTraitForm.invalid" type="submit">submit</button>
+</form>

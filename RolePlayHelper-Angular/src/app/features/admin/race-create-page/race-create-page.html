@@ -1,1 +1,38 @@
+<div class="page-wrapper">
+  <div class="AttributeContainer">
+    <form>
+      <h4>Stat modifier</h4>
+      <div class="Attribute">
+        @for (item of raceTraitOptions; track $index) {
+          <label for="{{ item }}">{{ item }}</label
+          ><br />
+          <input type="number" name="{{ item }}" max="5" min="0" />
+          <br />
+        }
+      </div>
+    </form>
+  </div>
 
+  <div class="AttributeContainer">
+    <form [formGroup]="raceLanguageForm">
+      <h4>Language</h4>
+      @for (item of languages.controls; track $index) {
+        <div [formGroup]="item">
+          <div>
+            <label>Langue {{ $index + 1 }}:</label><br />
+            <input formControlName="language" list="languageList" />
+            <datalist id="languageList">
+              @for (language of languageList; track $index) {
+                <option value="{{ language.name }}"></option>
+              }
+            </datalist>
+          </div>
+          @if ($index > 0) {
+            <button (click)="removeLanguage($index)">remove</button>
+          }
+        </div>
+      }
+      <button (click)="addLangue()">Add Language</button>
+    </form>
+  </div>
+</div>
