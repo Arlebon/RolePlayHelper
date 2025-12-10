@@ -16,4 +16,6 @@ export class RaceService {
   getDetails(url: string): Promise<any> {
     return firstValueFrom(this._httpClient.get(environment.apiUrl + url));
   }
+
+  getAllForCreateChar() {}
 }
