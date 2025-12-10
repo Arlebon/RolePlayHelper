@@ -16,6 +16,15 @@ namespace RolePlayHelper.API.Mappers
             };
         }
 
+        public static RaceListAddCharDto ToRaceListAddCharDto(this Race race)
+        {
+            return new RaceListAddCharDto()
+            {
+                Id = race.Id,
+                Name = race.Name,
+            };
+        }
+
         public static Race ToRace(this RaceFormDto form)
         {
             return new Race()
