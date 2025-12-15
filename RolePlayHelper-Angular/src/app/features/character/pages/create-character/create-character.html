@@ -3,14 +3,16 @@
     <p>To create your character, you must chose a name, a race and a class. Then you have 27 points to give between the six stats. Each stat must be between 8 and 15.</p>
     <div class="card me-1">
         <form [formGroup]="characterCreaterForm" (ngSubmit)="onSubmit()">
-            <div>
-                <label for="name">Name for character : </label>
-                <input type="text" maxlength="50" id="name" [formControl]="name">
-            </div>
-            <div class="race-choice">
+            <div class="inputs">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="name">Name for character : </label>
+                    <input type="text" maxlength="50" id="name" [formControl]="name">
+                </div>
+                <div class="d-flex justify-content-between">
                     <label for="race">Select a race : </label>
                     <app-input-autocomplete-list [formControl]="race" [elements]="races" (clickSelect)="onRaceClick($event)" (textTyped)="loadFilter($event)" />
                 </div>
+            </div>
             <div>
                 <label for="str">STR :</label>
                 <input type="number" id="str" max="15" min="8" value="8" [formControl]="str" (change)="onChange()">
@@ -30,7 +32,7 @@
             <div>
                 <p>Points left : {{ availablePoints }}/27</p>
             </div>
-            <button type="submit">TEST</button>
+            <button type="submit" [disabled]="invalidRace">TEST</button>
         </form>
     </div>
 </div>
