@@ -30,4 +30,17 @@ export class RaceService {
       this._httpClient.get<RaceListCreateChar>(environment.apiUrl + 'api/Race/' + id),
     );
   }
+
+  getSomeByName(filter: string) {
+    if (filter.length > 0) {
+      return firstValueFrom(
+        this._httpClient.get<RaceListCreateChar[]>(
+          environment.apiUrl + 'api/Race/RaceListAddCharFiltered',
+          { params: { filter: filter } },
+        ),
+      );
+    } else {
+      return this.getAllForCreateChar();
+    }
+  }
 }
