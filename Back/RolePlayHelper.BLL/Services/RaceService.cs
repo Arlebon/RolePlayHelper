@@ -147,5 +147,10 @@ namespace RolePlayHelper.BLL.Services
 
             _raceRepository.Update(existing);
         }
+
+        public List<Race> GetSomeByName(string filter)
+        {
+            return _raceRepository.GetSomeByName(filter);
+        }
     }
 }

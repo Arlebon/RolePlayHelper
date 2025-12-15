@@ -9,7 +9,7 @@
             </div>
             <div class="race-choice">
                     <label for="race">Select a race : </label>
-                    <app-input-autocomplete-list [formControl]="race" [elements]="races" (clickSelect)="onRaceClick($event)" />
+                    <app-input-autocomplete-list [formControl]="race" [elements]="races" (clickSelect)="onRaceClick($event)" (textTyped)="loadFilter($event)" />
                 </div>
             <div>
                 <label for="str">STR :</label>

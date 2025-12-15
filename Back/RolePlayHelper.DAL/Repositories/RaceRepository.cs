@@ -30,5 +30,10 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set.Include(sm => sm.StatModifier).ToList();
         }
+
+        public List<Race> GetSomeByName(string filter)
+        {
+            return _set.Where(r => r.Name.StartsWith(filter)).ToList();
+        }
     }
 }

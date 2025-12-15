@@ -69,12 +69,19 @@ export class CreateCharacter implements OnInit {
 
   onSubmit() {
     this.cdr.markForCheck();
-    if (this.races.find((r) => r.name === this.characterCreaterForm.value.race!)?.id == undefined) {
-      console.log('RIP');
+    if (this.races.find((r) => r.name === this.characterCreaterForm.value.race!)?.id != undefined) {
+      console.log(this.characterCreaterForm);
     }
   }
 
   onRaceClick(id: number) {
     this._raceService.getOneById(id).then((data) => this.race.setValue(data.name));
+  }
+
+  loadFilter(filter: string) {
+    this._raceService.getSomeByName(filter).then((data) => {
+      this.races = data;
+      this.cdr.markForCheck();
+    });
   }
 }

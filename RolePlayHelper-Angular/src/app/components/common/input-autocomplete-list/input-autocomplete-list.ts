@@ -18,10 +18,21 @@ export class InputAutocompleteList {
   formControl = input.required<FormControl>();
 
   clickSelect = output<number>();
+  textTyped = output<string>();
 
   touched: boolean = false;
+  timer: any;
 
   onClickSelect(id: number) {
     this.clickSelect.emit(id);
+  }
+
+  onTextTyped() {
+    let timer: any;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      this.touched = true;
+      this.textTyped.emit(this.formControl().value);
+    }, 400);
   }
 }

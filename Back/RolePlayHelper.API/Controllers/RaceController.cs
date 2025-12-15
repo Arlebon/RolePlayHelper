@@ -65,5 +65,12 @@ namespace RolePlayHelper.API.Controllers
             _raceService.Update(id, form.ToRace());
             return Ok();
         }
+
+        [HttpGet("RaceListAddCharFiltered")]
+        public ActionResult GetSomeByName([FromQuery] string filter)
+        {
+            List<RaceListAddCharDto> races = _raceService.GetSomeByName(filter).Select(r => r.ToRaceListAddCharDto()).ToList();
+            return Ok(races);
+        }
     }
 }
