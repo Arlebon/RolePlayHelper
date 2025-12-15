@@ -18,7 +18,7 @@ export class CreateCharacter implements OnInit {
 
   availablePoints: number = 27;
   races: RaceListCreateChar[] = [];
-  inputRaceTouched: boolean = false;
+  invalidRace: boolean = false;
 
   name = new FormControl('', [Validators.required, Validators.min(2), Validators.max(50)]);
   race = new FormControl('', [Validators.required]);
@@ -75,12 +75,21 @@ export class CreateCharacter implements OnInit {
   }
 
   onRaceClick(id: number) {
-    this._raceService.getOneById(id).then((data) => this.race.setValue(data.name));
+    this._raceService.getOneById(id).then((data) => {
+      this.race.setValue(data.name);
+      this.invalidRace = false;
+      this.loadFilter(this.race.value!);
+    });
   }
 
   loadFilter(filter: string) {
     this._raceService.getSomeByName(filter).then((data) => {
-      this.races = data;
+      if (data.length == 0) {
+        this.invalidRace = true;
+      } else {
+        this.races = data;
+        this.invalidRace = false;
+      }
       this.cdr.markForCheck();
     });
   }

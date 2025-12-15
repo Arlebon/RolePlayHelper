@@ -1,9 +1,7 @@
-input {
-    margin: 4px;
+.inputs {
+    width: fit-content;
 }
 
-.race-choice {
-    display: flex;
-    align-items: center;
-    width: 100%;
+input {
+    margin: 4px 0 4px 4px;
 }
