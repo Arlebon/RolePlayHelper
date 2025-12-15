@@ -20,9 +20,25 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/language">Languages</a>
           <!-- <div class="dropdown-divider"></div> -->
-          <a class="dropdown-item" routerLink="/race-trait">Racetraits</a>
+          <a class="dropdown-item" routerLink="/race-trait">Race Traits</a>
           <a class="dropdown-item" routerLink="/race">Races</a>
           <a class="dropdown-item" routerLink="/char-class">Classes</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownCharacter"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Character
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownCharacter">
+          <a class="dropdown-item" routerLink="/character/create-character">Create Character</a>
         </div>
       </li>
       @if (!isConnected()) {
@@ -55,7 +71,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" routerLink="admin/language/create">Languages</a>
             <!-- <div class="dropdown-divider"></div> -->
-            <a class="dropdown-item" routerLink="admin/race-trait/create">Racetraits</a>
+            <a class="dropdown-item" routerLink="admin/race-trait/create">Race Traits</a>
             <a class="dropdown-item" routerLink="admin/race/create">Races</a>
             <a class="dropdown-item" routerLink="admin/char-class/create">Classes</a>
           </div>

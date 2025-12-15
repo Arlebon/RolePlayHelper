@@ -24,6 +24,11 @@ namespace RolePlayHelper.BLL.Services
             return _raceRepository.GetAll().ToList();
         }
 
+        public List<Race> GetAllWithStatModifier()
+        {
+            return _raceRepository.GetAllWithStatModifier().ToList();
+        }
+
         public Race GetOneById(int id)
         {
             Race? race = _raceRepository.GetOne(id);

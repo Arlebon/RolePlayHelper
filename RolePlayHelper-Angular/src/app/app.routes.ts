@@ -32,4 +32,8 @@ export const routes: Routes = [
     path: 'error',
     loadChildren: () => import('./features/error/error.routes').then((r) => r.routes),
   },
+  {
+    path: 'character',
+    loadChildren: () => import('./features/character/character.routes').then((r) => r.routes),
+  },
 ];

@@ -19,11 +19,25 @@ namespace RolePlayHelper.API.Controllers
             _raceService = raceService;
         }
 
-        [HttpGet]
-        public ActionResult<List<RaceListDto>> GetAll()
+        [HttpGet("RaceListAddChar")]
+        public ActionResult<List<RaceListAddCharDto>> GetAllAddChar()
         {
-            List<RaceListDto> races = _raceService.GetAll().Select(r => r.ToRaceListDto()).ToList();
+            List<RaceListAddCharDto> races = _raceService.GetAll().Select(r => r.ToRaceListAddCharDto()).ToList();
             return Ok(races);
+        }
+
+        [HttpGet]
+        public ActionResult<List<RaceListDto>> GetAllWithStatModifier()
+        {
+            List<RaceListDto> races = _raceService.GetAllWithStatModifier().Select(r => r.ToRaceListDto()).ToList();
+            return Ok(races);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetOneById([FromRoute] int id)
+        {
+            RaceListAddCharDto race = _raceService.GetOneById(id).ToRaceListAddCharDto();
+            return Ok(race);
         }
 
         [HttpPost("Add")]
