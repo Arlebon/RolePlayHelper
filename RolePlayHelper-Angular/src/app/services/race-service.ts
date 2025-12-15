@@ -24,4 +24,10 @@ export class RaceService {
       this._httpClient.get<RaceListCreateChar[]>(environment.apiUrl + 'api/Race/RaceListAddChar'),
     );
   }
+
+  getOneById(id: number) {
+    return firstValueFrom(
+      this._httpClient.get<RaceListCreateChar>(environment.apiUrl + 'api/Race/' + id),
+    );
+  }
 }

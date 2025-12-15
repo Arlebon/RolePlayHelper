@@ -7,15 +7,10 @@
                 <label for="name">Name for character : </label>
                 <input type="text" maxlength="50" id="name" [formControl]="name">
             </div>
-            <div>
-                <label for="race">Select a race : </label>
-                <input type="text" id="race" list="raceList" [formControl]="race">
-                <datalist id="raceList">
-                    @for (race of races; track race.id) {
-                        <option [value]="race.name">{{race.name}}</option>
-                    }
-                </datalist>
-            </div>
+            <div class="race-choice">
+                    <label for="race">Select a race : </label>
+                    <app-input-autocomplete-list [formControl]="race" [elements]="races" (clickSelect)="onRaceClick($event)" />
+                </div>
             <div>
                 <label for="str">STR :</label>
                 <input type="number" id="str" max="15" min="8" value="8" [formControl]="str" (change)="onChange()">

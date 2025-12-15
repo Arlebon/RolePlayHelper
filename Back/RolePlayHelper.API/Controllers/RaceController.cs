@@ -33,6 +33,13 @@ namespace RolePlayHelper.API.Controllers
             return Ok(races);
         }
 
+        [HttpGet("{id}")]
+        public ActionResult GetOneById([FromRoute] int id)
+        {
+            RaceListAddCharDto race = _raceService.GetOneById(id).ToRaceListAddCharDto();
+            return Ok(race);
+        }
+
         [HttpPost("Add")]
         [Authorize(Roles = "Admin")]
         public ActionResult Add([FromBody] RaceFormDto form)
