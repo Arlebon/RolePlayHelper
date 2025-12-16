@@ -32,4 +32,17 @@ export class CharClassService {
       ),
     );
   }
+
+  getSomeByNameCharCreate(filter: string): Promise<CharClassListCreateChar[]> {
+    if (filter.length > 0) {
+      return firstValueFrom(
+        this._httpClient.get<CharClassListCreateChar[]>(
+          environment.apiUrl + 'api/CharClass/CharClassListAddChar',
+          { params: { filter: filter } },
+        ),
+      );
+    } else {
+      return this.getClassesCharCreate();
+    }
+  }
 }

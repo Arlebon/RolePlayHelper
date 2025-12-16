@@ -10,5 +10,10 @@ namespace RolePlayHelper.DAL.Repositories
         public CharClassRepository(RolePlayHelperContext context) : base(context)
         {
         }
+
+        public List<CharClass> GetSomeByName(string filter)
+        {
+            return _set.Where(c => c.Name.StartsWith(filter)).ToList();
+        }
     }
 }
