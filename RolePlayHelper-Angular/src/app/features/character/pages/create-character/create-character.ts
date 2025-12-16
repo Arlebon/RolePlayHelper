@@ -5,6 +5,7 @@ import { RaceService } from 'src/app/services/race-service';
 import { InputAutocompleteList } from '@components/common/input-autocomplete-list/input-autocomplete-list';
 import { CharClassListCreateChar } from '@core/models/char-class/char-class-list-create-char.model';
 import { CharClassService } from 'src/app/services/char-class-service';
+import { CharacterService } from 'src/app/services/character-service';
 
 @Component({
   selector: 'app-create-character',
@@ -16,6 +17,7 @@ export class CreateCharacter implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _raceService = inject(RaceService);
   private readonly _classService = inject(CharClassService);
+  private readonly _charService = inject(CharacterService);
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -23,6 +25,7 @@ export class CreateCharacter implements OnInit {
   races: RaceListCreateChar[] = [];
   classes: CharClassListCreateChar[] = [];
   invalidRace: boolean = true;
+  createError: string = '';
 
   name = new FormControl('', [Validators.required, Validators.min(2), Validators.max(50)]);
   race = new FormControl(null, [Validators.required]);
@@ -78,8 +81,28 @@ export class CreateCharacter implements OnInit {
   }
 
   onSubmit() {
-    this.cdr.markForCheck();
-    console.log(this.characterCreaterForm);
+    if (this.characterCreaterForm.valid) {
+      const charClassIdsTemp: number[] = [];
+      charClassIdsTemp.push(this.characterCreaterForm.value.class!);
+
+      this._charService
+        .createChar({
+          name: this.characterCreaterForm.value.name!,
+          raceId: this.characterCreaterForm.value.race!,
+          charClassIds: charClassIdsTemp,
+          str: this.characterCreaterForm.value.str!,
+          dex: this.characterCreaterForm.value.dex!,
+          cha: this.characterCreaterForm.value.cha!,
+          int: this.characterCreaterForm.value.int!,
+          con: this.characterCreaterForm.value.con!,
+          wis: this.characterCreaterForm.value.wis!,
+        })
+        .then(() => console.log('Creation success'))
+        .catch((err) => {
+          console.error(err);
+          this.createError = err.message;
+        });
+    }
   }
 
   loadRaceFilter(filter: string) {
@@ -97,18 +120,18 @@ export class CreateCharacter implements OnInit {
     });
   }
 
-  // loadClassFilter(filter: string) {
-  //   this._classService.getSomeByName(filter).then((data) => {
-  //     if (data.length == 0) {
-  //       this.invalidRace = true;
-  //     } else {
-  //       this.races = data;
-  //       this.invalidRace = false;
-  //       if (this.races.find((r) => r.name == filter) === undefined) {
-  //         this.invalidRace = true;
-  //       }
-  //     }
-  //     this.cdr.markForCheck();
-  //   });
-  // }
+  loadClassFilter(filter: string) {
+    this._classService.getSomeByNameCharCreate(filter).then((data) => {
+      if (data.length == 0) {
+        this.invalidRace = true;
+      } else {
+        this.classes = data;
+        this.invalidRace = false;
+        if (this.classes.find((c) => c.name == filter) === undefined) {
+          this.invalidRace = true;
+        }
+      }
+      this.cdr.markForCheck();
+    });
+  }
 }

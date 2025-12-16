@@ -37,5 +37,10 @@ namespace RolePlayHelper.BLL.Services
 
             return charClass;
         }
+
+        public List<CharClass> GetSomeByName(string filter)
+        {
+            return _charClassRepository.GetSomeByName(filter);
+        }
     }
 }

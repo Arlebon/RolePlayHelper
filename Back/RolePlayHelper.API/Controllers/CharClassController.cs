@@ -42,6 +42,13 @@ namespace RolePlayHelper.API.Controllers
             return Ok(charClass);
         }
 
+        [HttpGet("CharClassListAddCharFiltered")]
+        public ActionResult<List<CharClassListAddCharDto>> GetSomeByNameAddCharList([FromQuery] string filter)
+        {
+            List<CharClassListAddCharDto> classes = _charClassService.GetSomeByName(filter).Select(c => c.ToCharClassListAddCharDto()).ToList();
+            return Ok(classes);
+        }
+
         [HttpPost("Add-Class")]
         public ActionResult Add([FromBody] CharClassFormDto form)
         {

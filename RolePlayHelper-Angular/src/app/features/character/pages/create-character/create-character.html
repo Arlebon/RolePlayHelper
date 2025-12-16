@@ -1,98 +1,45 @@
 <h1>Character Creator</h1>
 <div class="card me-2">
-  <p>
-    To create your character, you must chose a name, a race and a class. Then you have 27 points to
-    give between the six stats. Each stat must be between 8 and 15.
-  </p>
-  <div class="card me-1">
-    <form [formGroup]="characterCreaterForm" (ngSubmit)="onSubmit()">
-      <div class="inputs">
-        <div class="d-flex justify-content-between align-items-center">
-          <label for="name">Name for character : </label>
-          <input type="text" maxlength="50" id="name" [formControl]="name" />
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <label for="race">Select a race : </label>
-          <app-input-autocomplete-list
-            class="input"
-            [formControl]="race"
-            [elements]="races"
-            (textTyped)="loadRaceFilter($event)"
-          />
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-          <label for="class">Select a class : </label>
-          <app-input-autocomplete-list class="input" [formControl]="class" [elements]="classes" />
-        </div>
-      </div>
-      <div>
-        <label for="str">STR :</label>
-        <input
-          type="number"
-          id="str"
-          max="15"
-          min="8"
-          value="8"
-          [formControl]="str"
-          (change)="onChange()"
-        />
-        <label for="dex">DEX : </label>
-        <input
-          type="number"
-          id="dex"
-          max="15"
-          min="8"
-          value="8"
-          [formControl]="dex"
-          (change)="onChange()"
-        />
-        <label for="cha">CHA :</label>
-        <input
-          type="number"
-          id="cha"
-          max="15"
-          min="8"
-          value="8"
-          [formControl]="cha"
-          (change)="onChange()"
-        />
-      </div>
-      <div>
-        <label for="int">INT : </label>
-        <input
-          type="number"
-          id="int"
-          max="15"
-          min="8"
-          value="8"
-          [formControl]="int"
-          (change)="onChange()"
-        />
-        <label for="con">CON :</label>
-        <input
-          type="number"
-          id="con"
-          max="15"
-          min="8"
-          value="8"
-          [formControl]="con"
-          (change)="onChange()"
-        />
-        <label for="wis">WIS : </label>
-        <input
-          type="number"
-          id="wis"
-          max="15"
-          min="8"
-          value="8"
-          [formControl]="wis"
-          (change)="onChange()"
-        />
-      </div>
-      <div>
-        <p>Points left : {{ availablePoints }}/27</p>
-      </div>
-      <button type="submit" [disabled]="invalidRace">TEST</button>
-    </form>
-  </div>
+    <p>To create your character, you must chose a name, a race and a class. Then you have 27 points to give between the six stats. Each stat must be between 8 and 15.</p>
+    <div class="card me-1">
+        <form [formGroup]="characterCreaterForm" (ngSubmit)="onSubmit()">
+            <div class="inputs">
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="name">Name for character : </label>
+                    <input type="text" maxlength="50" id="name" [formControl]="name">
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="race">Select a race : </label>
+                    <app-input-autocomplete-list class="input" [formControl]="race" [elements]="races" (textTyped)="loadRaceFilter($event)" />
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="class">Select a class : </label>
+                    <app-input-autocomplete-list class="input" [formControl]="class" [elements]="classes" (textTyped)="loadClassFilter($event)" />
+                    @if(race.touched) {
+                        <p>TEST</p>
+                    }
+                </div>
+            </div>
+            <div>
+                <label for="str">STR :</label>
+                <input type="number" id="str" max="15" min="8" value="8" [formControl]="str" (change)="onChange()">
+                <label for="dex">DEX : </label>
+                <input type="number" id="dex" max="15" min="8" value="8" [formControl]="dex" (change)="onChange()">
+                <label for="cha">CHA :</label>
+                <input type="number" id="cha" max="15" min="8" value="8" [formControl]="cha" (change)="onChange()">
+            </div>
+            <div>
+                <label for="int">INT : </label>
+                <input type="number" id="int" max="15" min="8" value="8" [formControl]="int" (change)="onChange()">
+                <label for="con">CON :</label>
+                <input type="number" id="con" max="15" min="8" value="8" [formControl]="con" (change)="onChange()">
+                <label for="wis">WIS : </label>
+                <input type="number" id="wis" max="15" min="8" value="8" [formControl]="wis" (change)="onChange()">
+            </div>
+            <div>
+                <p>Points left : {{ availablePoints }}/27</p>
+            </div>
+            <button type="submit" [disabled]="invalidRace">TEST</button>
+        </form>
+    </div>
 </div>
