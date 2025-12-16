@@ -8,9 +8,13 @@
                     <label for="name">Name for character : </label>
                     <input type="text" maxlength="50" id="name" [formControl]="name">
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between align-items-center">
                     <label for="race">Select a race : </label>
-                    <app-input-autocomplete-list [formControl]="race" [elements]="races" (clickSelect)="onRaceClick($event)" (textTyped)="loadFilter($event)" />
+                    <app-input-autocomplete-list class="input" [formControl]="race" [elements]="races" (textTyped)="loadRaceFilter($event)" />
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <label for="class">Select a class : </label>
+                    <app-input-autocomplete-list class="input" [formControl]="class" [elements]="classes" />
                 </div>
             </div>
             <div>

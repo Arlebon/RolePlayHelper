@@ -1,4 +1,5 @@
 ﻿
+using RolePlayHelper.BLL.Exceptions.CharClass;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 
@@ -23,6 +24,18 @@ namespace RolePlayHelper.BLL.Services
         {
             // TO DO VERIFICATION
             _charClassRepository.Add(charClass);
+        }
+
+        public CharClass GetOne(int id)
+        {
+            CharClass? charClass = _charClassRepository.GetOne(id);
+
+            if(charClass == null)
+            {
+                throw new CharClassNotFoundException(id);
+            }
+
+            return charClass;
         }
     }
 }

@@ -29,6 +29,15 @@ namespace RolePlayHelper.API.Mappers
             };
         }
 
+        public static CharClassListAddCharDto ToCharClassListAddCharDto(this CharClass charClass)
+        {
+            return new CharClassListAddCharDto()
+            {
+                Id = charClass.Id,
+                Name = charClass.Name,
+            };
+        }
+
         public static CharClass ToCharClass(this CharClassFormDto form)
         {
             return new CharClass()

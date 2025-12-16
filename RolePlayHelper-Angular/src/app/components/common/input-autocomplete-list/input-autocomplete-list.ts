@@ -1,12 +1,18 @@
-import { Component, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { timeout } from 'rxjs';
+import { Component, forwardRef, input, output } from '@angular/core';
+import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input-autocomplete-list',
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule],
   templateUrl: './input-autocomplete-list.html',
   styleUrl: './input-autocomplete-list.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputAutocompleteList),
+      multi: true,
+    },
+  ],
 })
 export class InputAutocompleteList {
   elements = input.required<
@@ -17,14 +23,17 @@ export class InputAutocompleteList {
   >();
   formControl = input.required<FormControl>();
 
-  clickSelect = output<number>();
   textTyped = output<string>();
 
+  inputTextValue: string = '';
   touched: boolean = false;
   timer: any;
 
   onClickSelect(id: number) {
-    this.clickSelect.emit(id);
+    // this.clickSelect.emit(id);
+    this.formControl().setValue(id);
+    this.inputTextValue = this.elements().find((e) => e.id === id)?.name ?? '';
+    this.textTyped.emit(this.inputTextValue);
   }
 
   onTextTyped() {
@@ -32,7 +41,7 @@ export class InputAutocompleteList {
     clearTimeout(timer);
     timer = setTimeout(() => {
       this.touched = true;
-      this.textTyped.emit(this.formControl().value);
+      this.textTyped.emit(this.inputTextValue);
     }, 400);
   }
 }

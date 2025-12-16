@@ -1,5 +1,5 @@
 <div>
-    <input type="text" autocomplete="off" [formControl]="formControl()" (click)="touched = true" (blur)="touched = false" (keyup)="onTextTyped()">
+    <input type="text" autocomplete="off" [(ngModel)]="inputTextValue" (click)="touched = true" (blur)="touched = false" (keyup)="onTextTyped()">
     @if(touched) {
         <div class="list">
             <ul>
