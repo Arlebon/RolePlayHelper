@@ -1,12 +1,20 @@
 <div>
-    <input type="text" autocomplete="off" [(ngModel)]="inputTextValue" (click)="touched = true" (blur)="touched = false" (keyup)="onTextTyped()">
-    @if(touched) {
-        <div class="list">
-            <ul>
-                @for(e of elements(); track e.id) {
-                    <li (mousedown)="onClickSelect(e.id)">{{ e.name }}</li>
-                }
-            </ul>
-        </div>
-    }
+  <input
+    type="text"
+    autocomplete="off"
+    [(ngModel)]="inputTextValue"
+    [disabled]="disabled"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (keyup)="onTextTyped()"
+  />
+  @if (touched) {
+    <div class="list">
+      <ul>
+        @for (e of elements(); track e.id) {
+          <li (mousedown)="onClickSelect(e.id)">{{ e.name }}</li>
+        }
+      </ul>
+    </div>
+  }
 </div>

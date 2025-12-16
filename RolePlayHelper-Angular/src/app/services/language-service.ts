@@ -21,4 +21,17 @@ export class LanguageService {
       this._httpClient.post<LanguageCreate>(environment.apiUrl + 'api/Language', language),
     );
   }
+
+  getSomeByName(filter: string) {
+    if (filter.length > 0) {
+      return firstValueFrom(
+        this._httpClient.get<LanguageList[]>(
+          environment.apiUrl + 'api/Language/LanguageListFiltered',
+          { params: { filter: filter } },
+        ),
+      );
+    } else {
+      return this.getLanguages();
+    }
+  }
 }
