@@ -28,6 +28,20 @@ namespace RolePlayHelper.API.Controllers
             return Ok(characters);
         }
 
+        [HttpGet("CharClassListAddChar")]
+        public ActionResult<List<CharClassListAddCharDto>> GetAddCharList()
+        {
+            List<CharClassListAddCharDto> classes = _charClassService.getAll().Select(c => c.ToCharClassListAddCharDto()).ToList();
+            return Ok(classes);
+        }
+
+        [HttpGet("CharClassListAddChar/{id}")]
+        public ActionResult<CharClassListAddCharDto> GetOneAddCharList([FromRoute] int id)
+        {
+            CharClassListAddCharDto charClass = _charClassService.GetOne(id).ToCharClassListAddCharDto();
+            return Ok(charClass);
+        }
+
         [HttpPost("Add-Class")]
         public ActionResult Add([FromBody] CharClassFormDto form)
         {

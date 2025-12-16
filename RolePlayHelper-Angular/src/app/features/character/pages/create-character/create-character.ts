@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
 import { RaceListCreateChar } from '@core/models/race/race-list-create-char.model';
 import { RaceService } from 'src/app/services/race-service';
 import { InputAutocompleteList } from '@components/common/input-autocomplete-list/input-autocomplete-list';
+import { CharClassListCreateChar } from '@core/models/char-class/char-class-list-create-char.model';
+import { CharClassService } from 'src/app/services/char-class-service';
 
 @Component({
   selector: 'app-create-character',
@@ -13,15 +15,18 @@ import { InputAutocompleteList } from '@components/common/input-autocomplete-lis
 export class CreateCharacter implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _raceService = inject(RaceService);
+  private readonly _classService = inject(CharClassService);
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   availablePoints: number = 27;
   races: RaceListCreateChar[] = [];
-  invalidRace: boolean = false;
+  classes: CharClassListCreateChar[] = [];
+  invalidRace: boolean = true;
 
   name = new FormControl('', [Validators.required, Validators.min(2), Validators.max(50)]);
-  race = new FormControl('', [Validators.required]);
+  race = new FormControl(null, [Validators.required]);
+  class = new FormControl(null, [Validators.required]);
   str = new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]);
   dex = new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]);
   cha = new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]);
@@ -32,6 +37,7 @@ export class CreateCharacter implements OnInit {
   characterCreaterForm = this._fb.group({
     name: this.name,
     race: this.race,
+    class: this.class,
     str: this.str,
     dex: this.dex,
     cha: this.cha,
@@ -43,6 +49,10 @@ export class CreateCharacter implements OnInit {
   ngOnInit(): void {
     this._raceService.getAllForCreateChar().then((data) => {
       this.races = data;
+      this.cdr.markForCheck();
+    });
+    this._classService.getClassesCharCreate().then((data) => {
+      this.classes = data;
       this.cdr.markForCheck();
     });
     console.log(this.races);
@@ -69,28 +79,36 @@ export class CreateCharacter implements OnInit {
 
   onSubmit() {
     this.cdr.markForCheck();
-    if (this.races.find((r) => r.name === this.characterCreaterForm.value.race!)?.id != undefined) {
-      console.log(this.characterCreaterForm);
-    }
+    console.log(this.characterCreaterForm);
   }
 
-  onRaceClick(id: number) {
-    this._raceService.getOneById(id).then((data) => {
-      this.race.setValue(data.name);
-      this.invalidRace = false;
-      this.loadFilter(this.race.value!);
-    });
-  }
-
-  loadFilter(filter: string) {
+  loadRaceFilter(filter: string) {
     this._raceService.getSomeByName(filter).then((data) => {
       if (data.length == 0) {
         this.invalidRace = true;
       } else {
         this.races = data;
         this.invalidRace = false;
+        if (this.races.find((r) => r.name == filter) === undefined) {
+          this.invalidRace = true;
+        }
       }
       this.cdr.markForCheck();
     });
   }
+
+  // loadClassFilter(filter: string) {
+  //   this._classService.getSomeByName(filter).then((data) => {
+  //     if (data.length == 0) {
+  //       this.invalidRace = true;
+  //     } else {
+  //       this.races = data;
+  //       this.invalidRace = false;
+  //       if (this.races.find((r) => r.name == filter) === undefined) {
+  //         this.invalidRace = true;
+  //       }
+  //     }
+  //     this.cdr.markForCheck();
+  //   });
+  // }
 }
