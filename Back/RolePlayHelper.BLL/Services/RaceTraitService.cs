@@ -26,5 +26,10 @@ namespace RolePlayHelper.BLL.Services
 
             _raceTraitRepository.Add(raceTrait);
         }
+
+        public IEnumerable<RaceTrait> GetSomeByName(string filter)
+        {
+            return _raceTraitRepository.GetSomeByName(filter);
+        }
     }
 }

@@ -1,1 +1,51 @@
-<p>char-class-create-page works!</p>
+<form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+  <h3>Create Character Class</h3>
+
+  <!-- Name -->
+  <div>
+    <label>Class name</label><br />
+    <input type="text" formControlName="name" />
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label>Description</label><br />
+    <textarea formControlName="description"></textarea>
+  </div>
+
+  <hr />
+
+  <!-- Subclass toggle -->
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        [(ngModel)]="isSubClass"
+        [ngModelOptions]="{ standalone: true }"
+        (change)="onToggleSubclass()"
+      />
+      This is a subclass
+    </label>
+  </div>
+
+  <!-- Parent class selection -->
+  @if (isSubClass) {
+    <div>
+      <label>Parent class</label><br />
+      <select formControlName="parentClassId">
+        <option [ngValue]="null">-- Select a class --</option>
+        @for (cls of classList; track cls.id) {
+          <option [ngValue]="cls.id">{{ cls.name }}</option>
+        }
+      </select>
+
+      @if (classForm.get('parentClassId')?.touched && classForm.get('parentClassId')?.invalid) {
+        <div style="color: red">Parent class is required for a subclass</div>
+      }
+    </div>
+  }
+
+  <br />
+
+  <button type="submit">Create class</button>
+</form>

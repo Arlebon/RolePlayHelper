@@ -19,12 +19,12 @@
       @for (item of languagesFormArray.controls; track $index) {
         <div [formGroup]="item">
           <div>
-            <label>Langue {{ $index + 1 }}:</label>
+            <label>Language {{ $index + 1 }}:</label>
             <app-input-autocomplete-list
               [elements]="languageList"
               [formControl]="item.controls['language']"
               (textTyped)="loadLanguageFilter($event)"
-              (click)="onClick($index)"
+              (click)="onClickLanguageInput($index)"
             />
           </div>
           @if ($index > 0) {
@@ -39,5 +39,25 @@
 
   <div class="AttributeContainer">
     <h4>Race traits</h4>
+    <form [formGroup]="raceTraitForm" (ngSubmit)="onSubmitRacetrait()">
+      @for (item of raceTraitsFormArray.controls; track $index) {
+        <div [formGroup]="item">
+          <div>
+            <label>Race trait {{ $index + 1 }}:</label>
+            <app-input-autocomplete-list
+              [elements]="raceTraitList"
+              [formControl]="item.controls['raceTrait']"
+              (textTyped)="loadRaceTraitFilter($event)"
+              (click)="onClickRacetraitInput($index)"
+            />
+          </div>
+          @if ($index > 0) {
+            <button type="button" (click)="removeRaceTrait($index)">remove</button>
+          }
+        </div>
+      }
+      <button type="button" (click)="addRaceTrait()">Add race trait</button>
+      <button type="submit">submit</button>
+    </form>
   </div>
 </div>

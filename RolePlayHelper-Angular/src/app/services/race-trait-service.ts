@@ -9,6 +9,18 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class raceTraitService {
+  getSomeByName(filter: string) {
+    if (filter.length > 0) {
+      return firstValueFrom(
+        this._httpClient.get<RaceTraitList[]>(
+          environment.apiUrl + 'api/Race/RaceListAddCharFiltered',
+          { params: { filter: filter } },
+        ),
+      );
+    } else {
+      return this.getRaceTraits();
+    }
+  }
   private readonly _httpClient = inject(HttpClient);
 
   getRaceTraits(): Promise<RaceTraitList[]> {

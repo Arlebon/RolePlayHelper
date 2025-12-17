@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
+using RolePlayHelper.API.Models.Language;
 using RolePlayHelper.API.Models.RaceTrait;
 using RolePlayHelper.BLL.Services;
 using RolePlayHelper.DL.Entities;
@@ -30,6 +31,13 @@ namespace RolePlayHelper.API.Controllers
         {
             _raceTraitService.Add(form.ToRaceTrait());
             return Created();
-        } 
+        }
+
+        [HttpGet("RaceTraitListFiltered")]
+        public ActionResult GetSomeByName([FromQuery] string filter)
+        {
+            List<RaceTraitListDto> raceTraits = _raceTraitService.GetSomeByName(filter).Select(rt => rt.ToRaceTraitListDto()).ToList();
+            return Ok(raceTraits);
+        }
     }
 }

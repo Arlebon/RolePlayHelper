@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { CharClassCreateModel } from '@core/models/char-class/char-class-create.model';
 import { CharClassListCreateChar } from '@core/models/char-class/char-class-list-create-char.model';
 import { CharClassListModel } from '@core/models/char-class/char-class-list-model';
 import { environment } from '@env';
@@ -44,5 +45,14 @@ export class CharClassService {
     } else {
       return this.getClassesCharCreate();
     }
+  }
+
+  CreateCharClass(charClass: CharClassCreateModel) {
+    return firstValueFrom<CharClassCreateModel>(
+      this._httpClient.post<CharClassCreateModel>(
+        environment.apiUrl + 'api/CharClass/Add-Class',
+        charClass,
+      ),
+    );
   }
 }

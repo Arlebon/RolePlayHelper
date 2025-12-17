@@ -13,6 +13,7 @@ import { LanguageList } from '@core/models/language/language-list.model';
 import { LanguageService } from 'src/app/services/language-service';
 import { raceTraitService } from 'src/app/services/race-trait-service';
 import { InputAutocompleteList } from '@components/common/input-autocomplete-list/input-autocomplete-list';
+import { RaceTraitList } from '@core/models/raceTrait/race-trait-list.model';
 
 @Component({
   selector: 'app-race-create-page',
@@ -55,7 +56,7 @@ export class RaceCreatePage implements OnInit {
 
     this.languagesFormArray.removeAt(index);
   }
-  onClick(id: number) {
+  onClickLanguageInput(id: number) {
     console.log(id);
 
     const languageValue: string = this.languageList.find((l) => l.id === id)?.name ?? '';
@@ -81,9 +82,63 @@ export class RaceCreatePage implements OnInit {
   }
   // #endregion
 
+  // #region RaceTraits
+  raceTraitList: RaceTraitList[] = [];
+  raceTraitsFormArray = this._fb.array([
+    this._fb.group({
+      raceTrait: ['', Validators.required],
+    }),
+  ]);
+
+  raceTraitForm = this._fb.group({
+    raceTraits: this.raceTraitsFormArray,
+  });
+
+  addRaceTrait() {
+    this.raceTraitsFormArray.push(
+      this._fb.group({
+        raceTrait: ['', [Validators.required]],
+      }),
+    );
+    this.loadRaceTraitFilter('');
+  }
+
+  removeRaceTrait(index: number) {
+    this.raceTraitsFormArray.removeAt(index);
+  }
+  onClickRacetraitInput(id: number) {
+    console.log(id);
+
+    const languageValue: string = this.languageList.find((l) => l.id === id)?.name ?? '';
+    this.loadLanguageFilter(languageValue);
+    console.log(languageValue);
+  }
+  onSubmitRacetrait() {}
+
+  invalidRaceTrait: boolean = true;
+  loadRaceTraitFilter(filter: string) {
+    this._raceTraitService.getSomeByName(filter).then((data) => {
+      if (data.length == 0) {
+        this.invalidRaceTrait = true;
+      } else {
+        this.raceTraitList = data;
+        this.invalidRaceTrait = false;
+        if (this.raceTraitList.find((rt) => rt.name == filter) === undefined) {
+          this.invalidRaceTrait = true;
+        }
+      }
+      this.cdr.markForCheck();
+    });
+  }
+  // #endregion
   ngOnInit(): void {
     this._languageService.getLanguages().then((data) => {
       this.languageList = data;
+      this.cdr.markForCheck();
+    });
+
+    this._raceTraitService.getRaceTraits().then((data) => {
+      this.raceTraitList = data;
       this.cdr.markForCheck();
     });
   }

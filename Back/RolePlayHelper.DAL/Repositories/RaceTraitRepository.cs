@@ -20,5 +20,10 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set.Include(rt => rt.Races).ToList();
         }
+
+        public List<RaceTrait> GetSomeByName(string filter)
+        {
+            return _set.Where(r => r.Name.StartsWith(filter)).ToList();
+        }
     }
 }

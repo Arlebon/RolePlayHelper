@@ -6,6 +6,7 @@ import { InputAutocompleteList } from '@components/common/input-autocomplete-lis
 import { CharClassListCreateChar } from '@core/models/char-class/char-class-list-create-char.model';
 import { CharClassService } from 'src/app/services/char-class-service';
 import { CharacterService } from 'src/app/services/character-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-character',
@@ -18,6 +19,7 @@ export class CreateCharacter implements OnInit {
   private readonly _raceService = inject(RaceService);
   private readonly _classService = inject(CharClassService);
   private readonly _charService = inject(CharacterService);
+  private readonly _router = inject(Router);
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -97,7 +99,7 @@ export class CreateCharacter implements OnInit {
           con: this.characterCreaterForm.value.con!,
           wis: this.characterCreaterForm.value.wis!,
         })
-        .then(() => console.log('Creation success'))
+        .then(() => this._router.navigate(['/user/characters']))
         .catch((err) => {
           console.error(err);
           this.createError = err.message;
