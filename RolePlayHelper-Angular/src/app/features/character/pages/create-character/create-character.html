@@ -15,9 +15,6 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <label for="class">Select a class : </label>
                     <app-input-autocomplete-list class="input" [formControl]="class" [elements]="classes" (textTyped)="loadClassFilter($event)" />
-                    @if(race.touched) {
-                        <p>TEST</p>
-                    }
                 </div>
             </div>
             <div>
@@ -39,7 +36,7 @@
             <div>
                 <p>Points left : {{ availablePoints }}/27</p>
             </div>
-            <button type="submit" [disabled]="invalidRace">TEST</button>
+            <button type="submit" [disabled]="invalidRace || characterCreaterForm.invalid || availablePoints != 0">TEST</button>
         </form>
     </div>
 </div>

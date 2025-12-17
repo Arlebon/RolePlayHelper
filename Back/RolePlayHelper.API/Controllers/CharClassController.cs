@@ -31,7 +31,7 @@ namespace RolePlayHelper.API.Controllers
         [HttpGet("CharClassListAddChar")]
         public ActionResult<List<CharClassListAddCharDto>> GetAddCharList()
         {
-            List<CharClassListAddCharDto> classes = _charClassService.getAll().Select(c => c.ToCharClassListAddCharDto()).ToList();
+            List<CharClassListAddCharDto> classes = _charClassService.getAll().Where(c => c.ParentClassId == null).Select(c => c.ToCharClassListAddCharDto()).ToList();
             return Ok(classes);
         }
 
@@ -45,7 +45,7 @@ namespace RolePlayHelper.API.Controllers
         [HttpGet("CharClassListAddCharFiltered")]
         public ActionResult<List<CharClassListAddCharDto>> GetSomeByNameAddCharList([FromQuery] string filter)
         {
-            List<CharClassListAddCharDto> classes = _charClassService.GetSomeByName(filter).Select(c => c.ToCharClassListAddCharDto()).ToList();
+            List<CharClassListAddCharDto> classes = _charClassService.GetSomeByName(filter).Where(c => c.ParentClassId == null).Select(c => c.ToCharClassListAddCharDto()).ToList();
             return Ok(classes);
         }
 
