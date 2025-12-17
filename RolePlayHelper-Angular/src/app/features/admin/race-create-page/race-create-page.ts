@@ -47,6 +47,7 @@ export class RaceCreatePage implements OnInit {
         language: ['', [Validators.required]],
       }),
     );
+    this.loadLanguageFilter('');
   }
 
   removeLanguage(index: number) {
@@ -54,7 +55,13 @@ export class RaceCreatePage implements OnInit {
 
     this.languagesFormArray.removeAt(index);
   }
+  onClick(id: number) {
+    console.log(id);
 
+    const languageValue: string = this.languageList.find((l) => l.id === id)?.name ?? '';
+    this.loadLanguageFilter(languageValue);
+    console.log(languageValue);
+  }
   onSubmitLanguage() {}
 
   invalidLanguage: boolean = true;
@@ -65,7 +72,7 @@ export class RaceCreatePage implements OnInit {
       } else {
         this.languageList = data;
         this.invalidLanguage = false;
-        if (this.languageList.find((r) => r.name == filter) === undefined) {
+        if (this.languageList.find((l) => l.name == filter) === undefined) {
           this.invalidLanguage = true;
         }
       }

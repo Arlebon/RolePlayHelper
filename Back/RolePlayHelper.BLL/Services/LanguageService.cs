@@ -25,5 +25,10 @@ namespace RolePlayHelper.BLL.Services
             }
             _languageRepository.Add(language);
         }
+
+        public List<Language> GetSomeByName(string filter)
+        {
+            return _languageRepository.GetSomeByName(filter);
+        }
     }
 }

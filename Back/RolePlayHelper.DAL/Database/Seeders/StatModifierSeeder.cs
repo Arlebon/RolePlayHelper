@@ -13,6 +13,18 @@ namespace RolePlayHelper.DAL.Database.Seeders
                 Id = 1,
                 STR = 2,
                 DEX = 1,
+                WIS = 0,
+                CHA = 0,
+                CON = 0,
+                INT = 0,
+                SpellAttack = 0,
+                SpellSave = 0,
+                ArmorClass = 0,
+                HitModifier = 0,
+                Initiative = 0,
+                MaxHP = 0,
+                MVT = 0,
+
             });
         }
     }

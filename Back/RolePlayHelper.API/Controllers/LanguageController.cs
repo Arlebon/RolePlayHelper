@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RolePlayHelper.API.Mappers;
 using RolePlayHelper.API.Models.Language;
+using RolePlayHelper.API.Models.Race;
 using RolePlayHelper.BLL.Services;
 using RolePlayHelper.DL.Entities;
 
@@ -32,5 +33,13 @@ namespace RolePlayHelper.API.Controllers
             _languageService.Add(formDto.ToLanguage());
             return Created();
         }
+
+        [HttpGet("LanguageListFiltered")]
+        public ActionResult GetSomeByName([FromQuery] string filter)
+        {
+            List<LanguageListDTO> languages = _languageService.GetSomeByName(filter).Select(l => l.ToLanguageListDTO()).ToList();
+            return Ok(languages);
+        }
+
     }
 }

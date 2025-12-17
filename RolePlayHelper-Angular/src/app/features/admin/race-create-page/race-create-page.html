@@ -24,6 +24,7 @@
               [elements]="languageList"
               [formControl]="item.controls['language']"
               (textTyped)="loadLanguageFilter($event)"
+              (click)="onClick($index)"
             />
           </div>
           @if ($index > 0) {
