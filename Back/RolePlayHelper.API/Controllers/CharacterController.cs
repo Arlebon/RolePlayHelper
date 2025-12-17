@@ -19,10 +19,18 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize]
-        public ActionResult<List<Character>> GetAll()
+        [Authorize]
+        public ActionResult<List<CharacterListDto>> GetAll()
         {
             List<CharacterListDto> characters = _characterService.GetAll().Select(c => c.ToCharacterListDto()).ToList();
+            return Ok(characters);
+        }
+
+        [HttpGet ("/api/characters/{userId}")]
+        [Authorize]
+        public ActionResult<List<CharacterListDto>> GetAllByUserId([FromQuery] int userId)
+        {
+            List<CharacterListDto> characters = _characterService.GetAllByUserId(userId).Select(c => c.ToCharacterListDto()).ToList();
             return Ok(characters);
         }
 

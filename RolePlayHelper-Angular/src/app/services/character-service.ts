@@ -4,12 +4,14 @@ import { CharClassListModel } from '@core/models/char-class/char-class-list-mode
 import { CharacterCreateForm } from '@core/models/character/character-create-form.model';
 import { environment } from '@env';
 import { firstValueFrom } from 'rxjs';
+import { AuthService } from './auth-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
   private readonly _httpClient = inject(HttpClient);
+  private readonly _authService = inject(AuthService);
 
   createChar(form: CharacterCreateForm) {
     return firstValueFrom(
@@ -18,10 +20,21 @@ export class CharacterService {
   }
 
   getCharacters(): Promise<CharClassListModel[]> {
+    console.log('username', this._authService.token.name);
+
     return firstValueFrom(
       this._httpClient.get<CharClassListModel[]>(
         environment.apiUrl + 'api/Character/List-Characters',
       ),
+    );
+  }
+
+  getCharactersByUser(): Promise<CharClassListModel[]> {
+    const userId = this._authService.userId();
+    console.log('userId: ', userId);
+
+    return firstValueFrom(
+      this._httpClient.get<CharClassListModel[]>(environment.apiUrl + 'api/characters/' + userId),
     );
   }
 }

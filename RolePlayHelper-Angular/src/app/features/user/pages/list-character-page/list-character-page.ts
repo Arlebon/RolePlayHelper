@@ -18,7 +18,7 @@ export class ListCharacterPage {
   characters: CharClassListModel[] = [];
 
   ngOnInit(): void {
-    this._characterService.getCharacters().then((data) => {
+    this._characterService.getCharactersByUser().then((data) => {
       console.log(data);
       this.characters = data;
       this.cdr.markForCheck();
