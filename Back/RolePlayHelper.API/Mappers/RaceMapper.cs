@@ -34,11 +34,11 @@ namespace RolePlayHelper.API.Mappers
                 StatModifier = form.StatModifier.ToStatModifier(),
 
                 // Pour chaque entré dans Langues je crée une nouvelle entité Langue.
-                Languages = form.Languages.Select(l => l.ToLanguage()).ToList(),
+                //Languages = form.Languages.Select(l => l.ToLanguage()).ToList(),
 
 
                 // Pour chaque entré dans Traits je crée une nouvelle entité RaceTrait.
-                Traits = form.Traits.Select(t => t.ToRaceTrait()).ToList()
+                //Traits = form.Traits.Select(t => t.ToRaceTrait()).ToList()
             };
         }
         public static Race ToRace(this RaceFormDto form, List<RaceTrait> traits)
@@ -50,7 +50,7 @@ namespace RolePlayHelper.API.Mappers
                 StatModifier = form.StatModifier.ToStatModifier(),
 
                 // Pour chaque entré dans Langues je crée une nouvelle entité Langue.
-                Languages = form.Languages.Select(l => l.ToLanguage()).ToList(),
+                // Languages = form.Languages.Select(l => l.ToLanguage()).ToList(),
 
 
                 // Pour chaque entré dans Traits je crée une nouvelle entité RaceTrait.

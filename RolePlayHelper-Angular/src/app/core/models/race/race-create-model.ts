@@ -17,9 +17,9 @@ export interface RaceForm {
     spellSave: number;
   };
   traits: {
-    name: string;
+    traitId: number;
   }[];
   languages: {
-    name: string;
+    languageId: number;
   }[];
 }

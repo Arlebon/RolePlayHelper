@@ -41,7 +41,7 @@ namespace RolePlayHelper.BLL.Services
             return race;
         }
 
-        public void Add(Race race) 
+        public void Add(Race race, List<int> langId, List<int> traitId) 
         {
             if(_raceRepository.ExistByName(race.Name))
             {

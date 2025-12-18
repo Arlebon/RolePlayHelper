@@ -151,9 +151,6 @@ export class RaceCreatePage implements OnInit {
     const newRace: RaceForm = {
       name: 'todo',
       description: 'todo',
-      languages: this.languagesFormArray.getRawValue().map((l) => ({
-        name: l.language!,
-      })),
       statModifier: {
         str: 0,
         dex: 0,
@@ -169,8 +166,11 @@ export class RaceCreatePage implements OnInit {
         spellAttack: 0,
         spellSave: 0,
       },
+      languages: this.languagesFormArray.getRawValue().map((l) => ({
+        languageId: parseInt(l.language!),
+      })),
       traits: this.raceTraitsFormArray.getRawValue().map((rt) => ({
-        name: rt.raceTrait!,
+        traitId: parseInt(rt.raceTrait!),
       })),
     };
 

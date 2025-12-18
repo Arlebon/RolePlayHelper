@@ -55,7 +55,7 @@ namespace RolePlayHelper.API.Controllers
                 .Select(langId => _languageService.GetById(langId))
                 .ToList();
 
-            _raceService.Add(form.ToRace());
+            _raceService.Add(form.ToRace(),form.Languages,form.Traits);
             return Created();
         }
 
