@@ -39,5 +39,15 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set.Any(c => c.UserId == userId);
         }
+
+        public List<Character> GetAllPublic()
+        {
+            return _set
+                .Include(c => c.Classes)
+                .Include(c => c.Race)
+                .Include(c => c.User)
+                .Where(c=> c.IsPublic == true)
+                .ToList();
+        }
     }
 }

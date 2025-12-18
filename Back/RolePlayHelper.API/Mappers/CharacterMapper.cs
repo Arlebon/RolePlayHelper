@@ -14,6 +14,23 @@ namespace RolePlayHelper.API.Mappers
                 RaceName = character.Race.Name,
                 ClassNames = character.Classes.Select(c => c.Name).ToList(),
                 CampaignName = character.CurrentCampaign?.Name,
+                IsPublic = character.IsPublic,
+                
+            };
+        }
+
+        public static CharacterPublicListDto ToCharacterPublicListDto(this Character c)
+        {
+            return new CharacterPublicListDto()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                RaceName = c.Race.Name,
+                ClassNames = c.Classes.Select(c => c.Name).ToList(),
+                CampaignName = c.CurrentCampaign?.Name,
+                IsPublic = c.IsPublic,
+                UserName = c.User.UserName,
+
             };
         }
 

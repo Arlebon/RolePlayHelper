@@ -97,6 +97,9 @@ namespace RolePlayHelper.BLL.Services
             return character;
         }
 
-
+        public List<Character> GetAllPublic()
+        {
+            return _characterRepository.GetAllPublic().ToList();
+        }
     }
 }

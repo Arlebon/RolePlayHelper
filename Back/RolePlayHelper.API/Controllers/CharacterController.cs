@@ -19,10 +19,19 @@ namespace RolePlayHelper.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
+
         public ActionResult<List<CharacterListDto>> GetAll()
         {
             List<CharacterListDto> characters = _characterService.GetAll().Select(c => c.ToCharacterListDto()).ToList();
+            return Ok(characters);
+        }
+
+        [HttpGet("/api/characters/public")]
+        
+        public ActionResult<List<CharacterPublicListDto>> GetAllPublic()
+        {
+            List<CharacterPublicListDto> characters = _characterService.GetAllPublic().Select(c => c.ToCharacterPublicListDto()).ToList();
             return Ok(characters);
         }
 

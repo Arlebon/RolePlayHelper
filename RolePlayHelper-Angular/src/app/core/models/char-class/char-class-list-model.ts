@@ -5,4 +5,6 @@ export interface CharClassListModel {
   parentClassId: number | null;
   parentClass: string | null;
   subClassNames: string[];
+  isPublic: boolean;
+  userName: string;
 }

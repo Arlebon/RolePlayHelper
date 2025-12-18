@@ -1,15 +1,16 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import { CharClassListModel } from '@core/models/char-class/char-class-list-model';
-import { CharacterService } from 'src/app/services/character-service';
 import { ListingTable } from '@components/common/listing-table/listing-table';
+import { CharClassListModel } from '@core/models/char-class/char-class-list-model';
+
+import { CharacterService } from 'src/app/services/character-service';
 
 @Component({
-  selector: 'app-list-character-page',
+  selector: 'app-character-public-list',
   imports: [ListingTable],
-  templateUrl: './list-character-page.html',
-  styleUrl: './list-character-page.scss',
+  templateUrl: './character-public-list.html',
+  styleUrl: './character-public-list.scss',
 })
-export class ListCharacterPage {
+export class CharacterPublicList {
   private readonly _characterService = inject(CharacterService);
 
   constructor(private cdr: ChangeDetectorRef) {}
@@ -17,7 +18,7 @@ export class ListCharacterPage {
   characters: CharClassListModel[] = [];
 
   ngOnInit(): void {
-    this._characterService.getCharactersByUser().then((data) => {
+    this._characterService.getCharactersPublic().then((data) => {
       console.log(data);
       this.characters = data;
       this.cdr.markForCheck();

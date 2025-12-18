@@ -1,4 +1,5 @@
-﻿using RolePlayHelper.BLL.Exceptions.RaceTrait;
+﻿using RolePlayHelper.BLL.Exceptions;
+using RolePlayHelper.BLL.Exceptions.RaceTrait;
 using RolePlayHelper.DAL.Repositories;
 using RolePlayHelper.DL.Entities;
 
@@ -30,6 +31,16 @@ namespace RolePlayHelper.BLL.Services
         public IEnumerable<RaceTrait> GetSomeByName(string filter)
         {
             return _raceTraitRepository.GetSomeByName(filter);
+        }
+
+        public RaceTrait GetById(int id)
+        {
+            RaceTrait? raceTrait = _raceTraitRepository.getOneById(id);
+
+            if (raceTrait is null)
+                throw new InvalidOperationException($"RaceTrait id '{id}' not found");
+
+            return raceTrait;
         }
     }
 }

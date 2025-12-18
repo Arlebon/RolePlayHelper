@@ -286,15 +286,15 @@ namespace RolePlayHelper.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "StatModifier",
                 columns: new[] { "Id", "ArmorClass", "CHA", "CON", "DEX", "HitModifier", "INT", "Initiative", "MVT", "MaxHP", "STR", "SpellAttack", "SpellSave", "WIS" },
-                values: new object[] { 1, null, null, null, 1, null, null, null, null, null, 2, null, null, null });
+                values: new object[] { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0 });
 
             migrationBuilder.InsertData(
                 table: "User_",
                 columns: new[] { "Id", "Email", "Password", "Role", "UserName" },
                 values: new object[,]
                 {
-                    { 1, "admin@admin.be", "$argon2id$v=19$m=65536,t=3,p=1$H7ukKpTOCKP9fpAW165ICQ$p6g3ofqO8+D6BaCWQUukeYJXiQpBzkcYETrYOOkaho4", "Admin", "admin" },
-                    { 2, "default@default.be", "$argon2id$v=19$m=65536,t=3,p=1$ZgQIsJS8T9zv5d8Wmy+BwQ$O0dSZahxdUbyhLnYZLPoX2nOyJh8maAoXHoQ39JzSWk", "User", "default" }
+                    { 1, "admin@admin.be", "$argon2id$v=19$m=65536,t=3,p=1$DwNqyw0sgTEjInq4a4Q1Xg$y3jbCHRzysLDs+PVt+gaEww6kLhEAb1tOLCxc+rkNvQ", "Admin", "admin" },
+                    { 2, "default@default.be", "$argon2id$v=19$m=65536,t=3,p=1$c1lvtjW4bQPtBeERl9927w$0BAiryeRcEqLrY9BUZ72UpgkXqW1r4ZDXjqNdfkSsSs", "User", "default" }
                 });
 
             migrationBuilder.InsertData(

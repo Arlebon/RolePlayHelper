@@ -22,4 +22,8 @@
     <ProjectReference Include="..\RolePlayHelper.DL\RolePlayHelper.DL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

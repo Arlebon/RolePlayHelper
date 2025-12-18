@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { RaceForm } from '@core/models/race/race-create-model';
 import { RaceListCreateChar } from '@core/models/race/race-list-create-char.model';
 import { RaceList } from '@core/models/race/race-list-model';
 import { environment } from '@env';
@@ -42,5 +43,11 @@ export class RaceService {
     } else {
       return this.getAllForCreateChar();
     }
+  }
+
+  Create(race: RaceForm) {
+    return firstValueFrom<RaceForm>(
+      this._httpClient.post<RaceForm>(environment.apiUrl + 'api/Race/Add', race),
+    );
   }
 }

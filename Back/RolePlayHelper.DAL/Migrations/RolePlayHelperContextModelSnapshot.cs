@@ -387,8 +387,19 @@ namespace RolePlayHelper.DAL.Migrations
                         new
                         {
                             Id = 1,
+                            ArmorClass = 0,
+                            CHA = 0,
+                            CON = 0,
                             DEX = 1,
-                            STR = 2
+                            HitModifier = 0,
+                            INT = 0,
+                            Initiative = 0,
+                            MVT = 0,
+                            MaxHP = 0,
+                            STR = 2,
+                            SpellAttack = 0,
+                            SpellSave = 0,
+                            WIS = 0
                         });
                 });
 
@@ -436,7 +447,7 @@ namespace RolePlayHelper.DAL.Migrations
                         {
                             Id = 1,
                             Email = "admin@admin.be",
-                            Password = "$argon2id$v=19$m=65536,t=3,p=1$H7ukKpTOCKP9fpAW165ICQ$p6g3ofqO8+D6BaCWQUukeYJXiQpBzkcYETrYOOkaho4",
+                            Password = "$argon2id$v=19$m=65536,t=3,p=1$DwNqyw0sgTEjInq4a4Q1Xg$y3jbCHRzysLDs+PVt+gaEww6kLhEAb1tOLCxc+rkNvQ",
                             Role = "Admin",
                             UserName = "admin"
                         },
@@ -444,7 +455,7 @@ namespace RolePlayHelper.DAL.Migrations
                         {
                             Id = 2,
                             Email = "default@default.be",
-                            Password = "$argon2id$v=19$m=65536,t=3,p=1$ZgQIsJS8T9zv5d8Wmy+BwQ$O0dSZahxdUbyhLnYZLPoX2nOyJh8maAoXHoQ39JzSWk",
+                            Password = "$argon2id$v=19$m=65536,t=3,p=1$c1lvtjW4bQPtBeERl9927w$0BAiryeRcEqLrY9BUZ72UpgkXqW1r4ZDXjqNdfkSsSs",
                             Role = "User",
                             UserName = "default"
                         });

@@ -17,9 +17,9 @@ namespace RolePlayHelper.API.Models.Race
 
         public StatModfierFormDto StatModifier { get; set; } = null!;
 
-        public List<RaceTraitFormDto> Traits { get; set; }= new();
+        public List<int> Traits { get; set; } = null!;
 
-        public List<LanguageFormDto> Languages { get; set; } = new();
+        public List<int> Languages { get; set; } = null!;
 
     }
 }

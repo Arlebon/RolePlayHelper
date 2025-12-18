@@ -25,5 +25,9 @@ namespace RolePlayHelper.DAL.Repositories
             return _set.Where(r => r.Name.StartsWith(filter)).ToList();
         }
 
+        public Language? GetById(int langId)
+        {
+            return _set.FirstOrDefault(l => l.Id == langId);
+        }
     }
 }

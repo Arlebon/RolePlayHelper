@@ -25,5 +25,10 @@ namespace RolePlayHelper.DAL.Repositories
         {
             return _set.Where(r => r.Name.StartsWith(filter)).ToList();
         }
+
+        public RaceTrait? getOneById(int id)
+        {
+            return _set.FirstOrDefault(t => t.Id == id);
+        }
     }
 }

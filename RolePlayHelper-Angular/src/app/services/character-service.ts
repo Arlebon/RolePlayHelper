@@ -20,12 +20,15 @@ export class CharacterService {
   }
 
   getCharacters(): Promise<CharClassListModel[]> {
-    console.log('username', this._authService.token.name);
-
     return firstValueFrom(
       this._httpClient.get<CharClassListModel[]>(
         environment.apiUrl + 'api/Character/List-Characters',
       ),
+    );
+  }
+  getCharactersPublic(): Promise<CharClassListModel[]> {
+    return firstValueFrom(
+      this._httpClient.get<CharClassListModel[]>(environment.apiUrl + 'api/characters/public'),
     );
   }
 

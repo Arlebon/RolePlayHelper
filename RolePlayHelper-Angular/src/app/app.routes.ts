@@ -3,6 +3,10 @@ import { adminGuard } from '@core/guards/admin-guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadComponent: () => import('./features/home/home').then((c) => c.Home),
+  },
+  {
     path: 'authentication',
     loadChildren: () =>
       import('./features/authentication/authentication.routes').then((r) => r.routes),

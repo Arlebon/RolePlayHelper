@@ -14,6 +14,9 @@ import { LanguageService } from 'src/app/services/language-service';
 import { raceTraitService } from 'src/app/services/race-trait-service';
 import { InputAutocompleteList } from '@components/common/input-autocomplete-list/input-autocomplete-list';
 import { RaceTraitList } from '@core/models/raceTrait/race-trait-list.model';
+import { RaceForm } from '@core/models/race/race-create-model';
+import { RaceService } from 'src/app/services/race-service';
+import { ApiError } from '@core/models/authentication-models';
 
 @Component({
   selector: 'app-race-create-page',
@@ -26,6 +29,7 @@ export class RaceCreatePage implements OnInit {
   private readonly _raceTraitService = inject(raceTraitService);
   private readonly _languageService = inject(LanguageService);
   private readonly _router = inject(Router);
+  private readonly _raceService = inject(RaceService);
 
   constructor(private cdr: ChangeDetectorRef) {}
   raceTraitOptions: string[] = ['str', 'dex', 'cha', 'int', 'wis', 'con'];
@@ -141,5 +145,40 @@ export class RaceCreatePage implements OnInit {
       this.raceTraitList = data;
       this.cdr.markForCheck();
     });
+  }
+  errorMessage: string = '';
+  async onSubmit() {
+    const newRace: RaceForm = {
+      name: 'todo',
+      description: 'todo',
+      languages: this.languagesFormArray.getRawValue().map((l) => ({
+        name: l.language!,
+      })),
+      statModifier: {
+        str: 0,
+        dex: 0,
+        cha: 0,
+        int: 0,
+        con: 0,
+        wis: 0,
+        mvt: 0,
+        maxHP: 0,
+        armorClass: 0,
+        hitModifier: 0,
+        initiative: 0,
+        spellAttack: 0,
+        spellSave: 0,
+      },
+      traits: this.raceTraitsFormArray.getRawValue().map((rt) => ({
+        name: rt.raceTrait!,
+      })),
+    };
+
+    try {
+      await this._raceService.Create(newRace);
+      this._router.navigate(['/race']);
+    } catch (err) {
+      this.errorMessage = (err as ApiError).message;
+    }
   }
 }

@@ -30,5 +30,15 @@ namespace RolePlayHelper.BLL.Services
         {
             return _languageRepository.GetSomeByName(filter);
         }
+
+        public Language GetById(int langId)
+        {
+            Language? language = _languageRepository.GetById(langId);
+            if (language != null)
+            {
+                return language;
+            }
+            else throw new KeyNotFoundException();
+        }
     }
 }

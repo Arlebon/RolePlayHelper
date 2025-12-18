@@ -13,10 +13,14 @@ namespace RolePlayHelper.API.Controllers
     public class RaceController : ControllerBase
     {
         private readonly RaceService _raceService;
+        private readonly RaceTraitService _raceTraitService;
+        private readonly LanguageService _languageService;
 
-        public RaceController(RaceService raceService)
+        public RaceController(RaceService raceService, RaceTraitService raceTraitService, LanguageService languageService)
         {
             _raceService = raceService;
+            _raceTraitService = raceTraitService;
+            _languageService = languageService;
         }
 
         [HttpGet("RaceListAddChar")]
@@ -44,6 +48,13 @@ namespace RolePlayHelper.API.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Add([FromBody] RaceFormDto form)
         {
+            List<RaceTrait> raceTraits = form.Traits
+                                .Select(traitId => _raceTraitService.GetById(traitId))
+                                .ToList();
+            List<Language> languages = form.Languages
+                .Select(langId => _languageService.GetById(langId))
+                .ToList();
+
             _raceService.Add(form.ToRace());
             return Created();
         }

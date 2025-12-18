@@ -14,6 +14,15 @@ namespace RolePlayHelper.API.Mappers
             };
         }
 
+        public static RaceTrait ToRaceTrait(this RaceTraitChoiceDto choiceDto)
+        {
+            return new RaceTrait()
+            {
+                Name = choiceDto.Name,
+                
+            };
+        }
+
         public static RaceTraitListDto ToRaceTraitListDto(this RaceTrait rt)
         {
             return new RaceTraitListDto
