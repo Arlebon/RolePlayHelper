@@ -41,6 +41,22 @@
           <a class="dropdown-item" routerLink="/character/create-character">Create Character</a>
         </div>
       </li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdownCampaign"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Campaign
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownCampaign">
+          <a class="dropdown-item" routerLink="/character/create-character">Create Campaign</a>
+        </div>
+      </li>
       @if (!isConnected()) {
         <li class="nav-item">
           <a class="nav-link" routerLink="/authentication/login">Login</a>
