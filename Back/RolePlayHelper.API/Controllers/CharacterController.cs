@@ -34,6 +34,15 @@ namespace RolePlayHelper.API.Controllers
             return Ok(characters);
         }
 
+        [Authorize]
+        [HttpGet("List-Characters")]
+        public ActionResult<List<CharacterListDto>> ListCharactersByUser()
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.Sid)!);
+            List<CharacterListDto> characters = _characterService.GetAllByUserId(userId).Select(c => c.ToCharacterListDto()).ToList();
+            return Ok(characters);
+        }
+
         [HttpPost("Add-Character")]
         [Authorize]
         public ActionResult Add([FromBody] CharacterFormDto form)
@@ -50,14 +59,6 @@ namespace RolePlayHelper.API.Controllers
             return Ok();
         }
 
-        [Authorize]
-        [HttpGet("List-Characters")]
-        public ActionResult<List<CharacterListDto>> ListCharactersByUser()
-        {
-            int userId = int.Parse(User.FindFirstValue(ClaimTypes.Sid)!);
-            List<CharacterListDto> characters = _characterService.GetAllByUserId(userId).Select(c => c.ToCharacterListDto()).ToList();
-            return Ok(characters);
-        }
 
         // TO DO LIST GLOBALE (NOM CHAR, RASSE, PROPRIETAIRE ETC)
 

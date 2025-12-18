@@ -26,10 +26,15 @@ export class CreateCharacter implements OnInit {
   availablePoints: number = 27;
   races: RaceListCreateChar[] = [];
   classes: CharClassListCreateChar[] = [];
-  invalidRace: boolean = true;
+  invalidRace: boolean = false;
+  invalidClass: boolean = false;
   createError: string = '';
 
-  name = new FormControl('', [Validators.required, Validators.min(2), Validators.max(50)]);
+  name = new FormControl('', [
+    Validators.required,
+    Validators.minLength(2),
+    Validators.maxLength(50),
+  ]);
   race = new FormControl(null, [Validators.required]);
   class = new FormControl(null, [Validators.required]);
   str = new FormControl(8, [Validators.required, Validators.min(8), Validators.max(15)]);
@@ -125,12 +130,12 @@ export class CreateCharacter implements OnInit {
   loadClassFilter(filter: string) {
     this._classService.getSomeByNameCharCreate(filter).then((data) => {
       if (data.length == 0) {
-        this.invalidRace = true;
+        this.invalidClass = true;
       } else {
         this.classes = data;
-        this.invalidRace = false;
+        this.invalidClass = false;
         if (this.classes.find((c) => c.name == filter) === undefined) {
-          this.invalidRace = true;
+          this.invalidClass = true;
         }
       }
       this.cdr.markForCheck();
