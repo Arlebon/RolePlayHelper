@@ -1,7 +1,7 @@
 <h1>Character Creator</h1>
 <div class="card me-2">
     <p>To create your character, you must chose a name, a race and a class. Then you have 27 points to give between the six stats. Each stat must be between 8 and 15.</p>
-    <div class="card me-1">
+    <div class="card me-1 mb-1">
         <form class="d-flex flex-column align-items-center" [formGroup]="characterCreaterForm" (ngSubmit)="onSubmit()">
             <div class="inputs">
                 <div class="d-flex justify-content-between align-items-center">
@@ -95,7 +95,7 @@
                     <small class="text-danger">You exceed the maximum points you can give</small>
                 </div>
             }
-            <button class="m-2" type="submit" [disabled]="invalidRace || characterCreaterForm.invalid || availablePoints != 0">CREATE CHARACTER</button>
+            <button class="btn btn-primary m-2" type="submit" [disabled]="invalidRace || characterCreaterForm.invalid || availablePoints != 0">CREATE CHARACTER</button>
         </form>
     </div>
 </div>

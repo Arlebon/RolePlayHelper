@@ -40,4 +40,8 @@ export const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./features/user/user.routes').then((r) => r.routes),
   },
+  {
+    path: 'campaign',
+    loadChildren: () => import('./features/campaign/campaign.routes').then((r) => r.routes),
+  },
 ];

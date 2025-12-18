@@ -1,0 +1,17 @@
+<h1>Campaign Creator</h1>
+<div class="card me-2">
+    <p>To create a campaign, you must give it a name, and select the maximum number of players for it. The GM will be the one who create the campaign, though you can give the role after the creation.</p>
+    <div class="card me-1 mb-1">
+        <form class="d-flex flex-column align-items-center" [formGroup]="campaignCreateForm">
+            <div>
+                <label for="name">Campaign name : </label>
+                <input type="text" id="name" maxlength="255" [formControl]="name" (blur)="name.setValue(name.value!.trim())">
+            </div>
+            <div>
+                <label for="nbPlayer">Select number of players : </label>
+                <input type="number" id="nbPlayer" min="2" max="8" [formControl]="nbPlayers">
+            </div>
+            <button class="btn btn-primary m-2" [disabled]="campaignCreateForm.invalid">CREATE CAMPAIGN</button>
+        </form>
+    </div>
+</div>
