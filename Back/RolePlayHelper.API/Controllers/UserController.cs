@@ -46,10 +46,31 @@ namespace RolePlayHelper.API.Controllers
 
             string token = _authService.GenerateToken(user);
 
-            return Ok(new {token});
+            var cookieOptions = new CookieOptions
+            {
+                // Le cookie va être géré par le serveur => JS client n'a pas accès à ce cookie
+                HttpOnly = true,
+
+                // Le cookie n'est envoyé qu'en HTTPS
+                Secure = true,
+
+                SameSite = SameSiteMode.Strict,
+
+                Expires = DateTime.UtcNow.AddHours(1)
+            };
+
+            // Ajouter le cookie au client
+            Response.Cookies.Append("accessToken", token, cookieOptions);
+
+            return Ok(token);
         }
 
-        
+        [HttpPost("logout")]
+        public ActionResult Logout()
+        {
+            Response.Cookies.Delete("accessToken");
 
+            return Ok();
+        }
     }
 }

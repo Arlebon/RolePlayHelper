@@ -11,6 +11,7 @@ using System.Text;
 using RolePlayHelper.API.CustomAuthorize.IsGM;
 using Microsoft.AspNetCore.Authorization;
 using RolePlayHelper.BLL;
+using AspNetCoreRateLimit;
 
 namespace RolePlayHelper.API
 {
@@ -102,6 +103,19 @@ namespace RolePlayHelper.API
                 option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(option =>
             {
+                option.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = (context) =>
+                    {
+                        var token = context.Request.Cookies["accessToken"];
+                        if (!string.IsNullOrEmpty(token))
+                        {
+                            context.Token = token;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
+
                 option.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -126,6 +140,13 @@ namespace RolePlayHelper.API
 
             builder.Services.AddDbContext<RolePlayHelperContext>(o => o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+            #region Rate Limiting
+            builder.Services.AddMemoryCache();
+            builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+            builder.Services.AddInMemoryRateLimiting();
+            builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            #endregion
+
             var app = builder.Build();
 
             AppSeeder.SeedDefaultCharacter(app.Services);
@@ -141,6 +162,8 @@ namespace RolePlayHelper.API
 
             app.UseCors("FFA");
 
+            app.UseIpRateLimiting();
+
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseAuthentication();
@@ -153,3 +176,4 @@ namespace RolePlayHelper.API
         }
     }
 }
+

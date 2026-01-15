@@ -8,7 +8,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (tk) {
     const cloneReq = req.clone({
-      headers: req.headers.append('Authorization', `Bearer ${tk}`),
+      withCredentials: true,
     });
     return next(cloneReq);
   }
